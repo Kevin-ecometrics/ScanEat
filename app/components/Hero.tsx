@@ -2,19 +2,45 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
-import { IconArrow, IconPlay, IconFork, IconCreditCard, IconStar, IconBell } from "./icons";
+import {
+  IconArrow,
+  IconPlay,
+  IconFork,
+  IconCreditCard,
+  IconStar,
+  IconBell,
+} from "./icons";
 import { useI18n } from "../providers/I18nProvider";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 function IconVolume({ muted }: { muted: boolean }) {
   return muted ? (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M11 5L6 9H2v6h4l5 4V5z" />
-      <line x1="23" y1="9" x2="17" y2="15" /><line x1="17" y1="9" x2="23" y2="15" />
+      <line x1="23" y1="9" x2="17" y2="15" />
+      <line x1="17" y1="9" x2="23" y2="15" />
     </svg>
   ) : (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M11 5L6 9H2v6h4l5 4V5z" />
       <path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" />
     </svg>
@@ -23,7 +49,16 @@ function IconVolume({ muted }: { muted: boolean }) {
 
 function IconExpand() {
   return (
-    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
     </svg>
   );
@@ -90,7 +125,16 @@ const FLOAT_CARDS: FloatCardData[] = [
   },
 ];
 
-function FloatCard({ icon, title, sub, accentColor, dotColor, side, delay, topPct }: FloatCardData) {
+function FloatCard({
+  icon,
+  title,
+  sub,
+  accentColor,
+  dotColor,
+  side,
+  delay,
+  topPct,
+}: FloatCardData) {
   return (
     <motion.div
       initial={{ opacity: 0, x: side === "left" ? -28 : 28, scale: 0.94 }}
@@ -102,14 +146,20 @@ function FloatCard({ icon, title, sub, accentColor, dotColor, side, delay, topPc
         top: topPct,
       }}
     >
-      <div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${accentColor}`}>
+      <div
+        className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${accentColor}`}
+      >
         {icon}
       </div>
       <div className="min-w-0">
-        <p className="text-xs font-bold text-navy leading-none mb-0.5 truncate">{title}</p>
+        <p className="text-xs font-bold text-navy leading-none mb-0.5 truncate">
+          {title}
+        </p>
         <p className="text-[10px] text-muted font-medium truncate">{sub}</p>
       </div>
-      <span className={`w-2 h-2 rounded-full ${dotColor} flex-shrink-0 animate-pulse`} />
+      <span
+        className={`w-2 h-2 rounded-full ${dotColor} flex-shrink-0 animate-pulse`}
+      />
     </motion.div>
   );
 }
@@ -138,7 +188,6 @@ export default function Hero() {
 
   return (
     <section className="bg-white px-6 pt-20 pb-0 flex flex-col items-center text-center overflow-hidden">
-
       {/* Badge */}
       <motion.div
         initial={{ opacity: 0, y: 14 }}
@@ -217,14 +266,12 @@ export default function Hero() {
 
         {/* Floating notification cards */}
         <AnimatePresence>
-          {cardsVisible && FLOAT_CARDS.map((card) => (
-            <FloatCard key={card.id} {...card} />
-          ))}
+          {cardsVisible &&
+            FLOAT_CARDS.map((card) => <FloatCard key={card.id} {...card} />)}
         </AnimatePresence>
 
         {/* Video frame */}
         <div className="relative rounded-[20px] overflow-hidden border border-border shadow-[0_40px_100px_-20px_oklch(62%_0.18_32_/_0.22),0_0_0_1px_oklch(62%_0.18_32_/_0.08)] group">
-
           {/* Browser chrome */}
           <div className="bg-[oklch(98.5%_0.005_80)] border-b border-border px-5 py-3.5 flex items-center gap-3">
             <div className="flex gap-1.5 flex-shrink-0">
@@ -245,7 +292,7 @@ export default function Hero() {
           <div className="relative bg-black">
             <video
               ref={videoRef}
-              src="/scaneat.mp4"
+              src="/scaneat.webm"
               autoPlay
               loop
               muted
