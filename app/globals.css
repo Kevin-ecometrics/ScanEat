@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(62% 0.18 32 / 0.4); }
+  50% { box-shadow: 0 0 0 12px oklch(62% 0.18 32 / 0); }
+}
+
+@theme {
+  --animate-fadeUp: fadeUp 0.45s ease both;
+  --animate-fadeDown: fadeDown 0.4s ease both;
+  --animate-pulse: pulse 2.4s ease infinite;
+
+  --color-accent: oklch(62% 0.18 32);
+  --color-accent-dark: oklch(50% 0.18 32);
+  --color-accent-light: oklch(96% 0.05 32);
+  --color-navy: oklch(22% 0.04 260);
+  --color-muted: oklch(55% 0.02 260);
+  --color-surface: oklch(98.5% 0.005 80);
+  --color-border: oklch(88% 0.01 260);
+
+  --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ── Light ── */
+:root {
+  --bg: #ffffff;
+  --fg: oklch(22% 0.04 260);
+  --card: #ffffff;
+  --border-c: oklch(88% 0.01 260);
+  --muted-c: oklch(55% 0.02 260);
+  --surface-c: oklch(98.5% 0.005 80);
+}
+
+body {
+  background-color: white;
+  color: oklch(22% 0.04 260);
+}
