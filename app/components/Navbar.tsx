@@ -7,15 +7,35 @@ import { useI18n } from "../providers/I18nProvider";
 
 function IconMenu() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="18" x2="21" y2="18" />
     </svg>
   );
 }
 
 function IconClose() {
   return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
       <path d="M18 6L6 18M6 6l12 12" />
     </svg>
   );
@@ -49,13 +69,15 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
-
           {/* Logo */}
-          <a href="/" className="flex items-center gap-2.5 no-underline flex-shrink-0">
-            <div className="w-9 h-9 rounded-[10px] bg-accent flex items-center justify-center text-white flex-shrink-0 shadow-md shadow-accent/25">
-              <IconQR />
-            </div>
-            <span className="text-navy font-extrabold text-xl tracking-tight">ScanEat</span>
+          <a
+            href="/"
+            className="flex items-center gap-2.5 no-underline flex-shrink-0"
+          >
+            <img src="/logo.png" alt="Logo ScanEat" className="w-12 h-12" />
+            <span className="text-navy font-extrabold text-xl tracking-tight">
+              ScanEat
+            </span>
           </a>
 
           {/* Desktop nav */}

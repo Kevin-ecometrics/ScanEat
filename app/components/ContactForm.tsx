@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
 import { IconStar, IconArrow, IconUser, IconMail, IconMessage, IconCheck } from "./icons";
 import { Reveal } from "./Reveal";
@@ -15,7 +16,7 @@ const TRUST = [
 ];
 
 export default function ContactForm() {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const c = t.contact;
   const [form, setForm] = useState({ name: "", email: "", restaurant: "", message: "" });
   const [status, setStatus] = useState<FormState>("idle");
@@ -28,11 +29,7 @@ export default function ContactForm() {
     e.preventDefault();
     setStatus("sending");
     try {
-      await fetch("https://formspree.io/f/placeholder", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(form),
-      });
+      await axios.post("http://localhost:4000/api/contact", { ...form, locale });
       setStatus("sent");
       setForm({ name: "", email: "", restaurant: "", message: "" });
     } catch {
@@ -77,10 +74,10 @@ export default function ContactForm() {
               <div className="mt-10 pt-8 border-t border-border">
                 <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted mb-3">Contacto directo</p>
                 <a
-                  href="mailto:hola@scaneat.ai"
+                  href="mailto:contact@scaneat.ai"
                   className="inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-accent transition-colors no-underline"
                 >
-                  <IconMail size={15} /> hola@scaneat.ai
+                  <IconMail size={15} /> contact@scaneat.ai
                 </a>
               </div>
             </Reveal>
@@ -188,7 +185,7 @@ export default function ContactForm() {
                 {status === "error" && (
                   <p className="text-center text-sm text-red-500 font-semibold">
                     {c.errorMsg}{" "}
-                    <a href="mailto:hola@scaneat.ai" className="underline">hola@scaneat.ai</a>
+                    <a href="mailto:contact@scaneat.ai" className="underline">contact@scaneat.ai</a>
                   </p>
                 )}
               </form>

@@ -22,31 +22,37 @@ export default function Footer() {
       links: [
         [nav.faq, "#faq"],
         [nav.contact, "#contact"],
-        ["hola@scaneat.ai", "mailto:hola@scaneat.ai"],
+        ["contact@scaneat.ai", "mailto:contact@scaneat.ai"],
       ],
     },
   ];
 
   return (
     <footer className="bg-white border-t-2 border-border">
-
       {/* Main footer */}
       <div className="max-w-6xl mx-auto px-6 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-
         {/* Brand col */}
         <div className="lg:col-span-2">
-          <a href="/" className="inline-flex items-center gap-2.5 no-underline mb-5">
-            <div className="w-9 h-9 rounded-[10px] bg-accent flex items-center justify-center text-white">
-              <IconQR size={16} />
-            </div>
-            <span className="text-navy font-extrabold text-xl tracking-tight">ScanEat</span>
+          <a
+            href="/"
+            className="inline-flex items-center gap-2.5 no-underline mb-5"
+          >
+            <img src="/logo.png" alt="Logo ScanEat" className="w-12 h-12" />
+
+            <span className="text-navy font-extrabold text-xl tracking-tight">
+              ScanEat
+            </span>
           </a>
           <p className="text-sm text-muted leading-relaxed max-w-xs mb-6">
-            La web app para restaurantes que digitaliza tu servicio, elimina errores y hace que tus comensales regresen.
+            La web app para restaurantes que digitaliza tu servicio, elimina
+            errores y hace que tus comensales regresen.
           </p>
           <div className="flex flex-col gap-2">
-            <a href="mailto:hola@scaneat.ai" className="inline-flex items-center gap-2 text-sm text-muted hover:text-accent transition-colors no-underline font-medium">
-              <IconMail size={15} /> hola@scaneat.ai
+            <a
+              href="mailto:contact@scaneat.ai"
+              className="inline-flex items-center gap-2 text-sm text-muted hover:text-accent transition-colors no-underline font-medium"
+            >
+              <IconMail size={15} /> contact@scaneat.ai
             </a>
             <span className="inline-flex items-center gap-2 text-sm text-muted font-medium">
               <IconMapPin size={15} /> Tijuana, Baja California
@@ -57,7 +63,9 @@ export default function Footer() {
         {/* Nav cols */}
         {NAV_COLS.map(({ title, links }) => (
           <div key={title}>
-            <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-navy mb-5">{title}</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-navy mb-5">
+              {title}
+            </p>
             <ul className="flex flex-col gap-3">
               {links.map(([label, href]) => (
                 <li key={label}>
