@@ -1,66 +1,93 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
-require("dotenv").config({ path: "../.env" });
-
 const express = require("express");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
 
 const app = express();
-const PORT = process.env.SERVER_PORT || 4000;
 
 app.use(cors({ origin: process.env.FRONTEND_ORIGIN || "*" }));
-app.use(express.json());
+app.use(express.json({ limit: "10kb" }));
+
+const safeText = (val) => (typeof val === "string" ? val.trim() : "");
+
+const escapeHTML = (str) => {
+  if (typeof str !== "string") return "";
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+};
 
 const transporter = nodemailer.createTransport({
   host: process.env.HOST_SMTP,
   port: Number(process.env.PORT_SMTP),
-  secure: true,
+  secure: Number(process.env.PORT_SMTP) === 465,
   auth: {
     user: process.env.EMAIL_SMTP,
     pass: process.env.PASSWORD_SMTP,
   },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 15000,
+  tls: {
+    rejectUnauthorized: false,
+  },
 });
 
-// Design tokens (converted from frontend oklch values)
+// 🎨 TOKENS (los mismos bonitos)
 const tokens = {
-  accent:      "#dd5139",
-  accentDark:  "#b3260e",
+  accent: "#dd5139",
+  accentDark: "#b3260e",
   accentLight: "#ffe6dd",
-  navy:        "#0f1b2d",
-  muted:       "#6b727e",
-  surface:     "#fcfaf6",
-  border:      "#d4d8de",
-  white:       "#ffffff",
+  navy: "#0f1b2d",
+  muted: "#6b727e",
+  surface: "#fcfaf6",
+  border: "#d4d8de",
+  white: "#ffffff",
 };
 
+// 🌍 COPY MULTI-IDIOMA
 const copy = {
   es: {
-    subject: (name, restaurant) => `[ScanEat] Nueva solicitud de ${name} — ${restaurant}`,
+    subject: (name, restaurant) =>
+      `[ScanEat] Nueva solicitud de ${name} — ${restaurant}`,
     title: "Nueva solicitud de demo",
     subtitle: "Alguien quiere conocer ScanEat",
-    labels: { name: "Nombre", email: "Correo electrónico", restaurant: "Restaurante", message: "Mensaje" },
+    labels: {
+      name: "Nombre",
+      email: "Correo electrónico",
+      restaurant: "Restaurante",
+      message: "Mensaje",
+    },
     replyBtn: "Responder al cliente",
-    footer: "Mensaje enviado desde el formulario de contacto en scaneat.mx",
+    footer: "Mensaje enviado desde scaneat.mx",
   },
   en: {
-    subject: (name, restaurant) => `[ScanEat] New request from ${name} — ${restaurant}`,
+    subject: (name, restaurant) =>
+      `[ScanEat] New request from ${name} — ${restaurant}`,
     title: "New demo request",
     subtitle: "Someone wants to learn about ScanEat",
-    labels: { name: "Name", email: "Email address", restaurant: "Restaurant", message: "Message" },
+    labels: {
+      name: "Name",
+      email: "Email address",
+      restaurant: "Restaurant",
+      message: "Message",
+    },
     replyBtn: "Reply to client",
-    footer: "Message sent from the contact form at scaneat.mx",
+    footer: "Message sent from scaneat.mx",
   },
 };
 
+// 📦 FIELD BONITO
 function field(label, value) {
   return `
   <tr>
     <td style="padding:0 0 16px;">
-      <table width="100%" cellpadding="0" cellspacing="0">
+      <table width="100%">
         <tr>
-          <td style="background:${tokens.surface};border:1.5px solid ${tokens.border};border-radius:12px;padding:16px 20px;">
-            <p style="margin:0 0 5px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:${tokens.muted};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">${label}</p>
-            <p style="margin:0;font-size:15px;font-weight:600;color:${tokens.navy};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.5;">${value}</p>
+          <td style="background:${tokens.surface};border:1px solid ${tokens.border};border-radius:12px;padding:16px;">
+            <p style="margin:0 0 5px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:${tokens.muted};">${label}</p>
+            <p style="margin:0;font-size:15px;font-weight:600;color:${tokens.navy};line-height:1.5;">${value}</p>
           </td>
         </tr>
       </table>
@@ -68,132 +95,181 @@ function field(label, value) {
   </tr>`;
 }
 
+// 📧 EMAIL BONITO COMPLETO
 function buildEmail({ name, email, restaurant, message, locale }) {
   const lang = copy[locale] || copy.es;
 
-  return `<!DOCTYPE html>
-<html lang="${locale}" xmlns="http://www.w3.org/1999/xhtml">
+  const safeName = escapeHTML(name);
+  const safeEmail = escapeHTML(email);
+  const safeRestaurant = escapeHTML(restaurant);
+  const safeMessage = escapeHTML(message).replace(/\n/g, "<br>");
+
+  return `
+<!DOCTYPE html>
+<html lang="${locale}">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>${lang.title}</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>${lang.title}</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 </head>
-<body style="margin:0;padding:0;background:${tokens.surface};-webkit-font-smoothing:antialiased;">
+<body style="margin:0;padding:0;background:${tokens.surface};font-family:'Plus Jakarta Sans',ui-sans-serif,system-ui,sans-serif;">
+
 <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:${tokens.surface};padding:40px 16px;">
+<tr><td align="center">
+
+<!-- ── Wrapper ── -->
+<table width="600" cellpadding="0" cellspacing="0" role="presentation" style="max-width:600px;width:100%;background:${tokens.white};border-radius:20px;border:1px solid ${tokens.border};overflow:hidden;box-shadow:0 4px 24px rgba(15,27,45,0.07);">
+
+  <!-- ── NAVBAR ── -->
   <tr>
-    <td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" role="presentation" style="max-width:600px;width:100%;">
-
-        <!-- ── Header ── -->
+    <td style="background:${tokens.white};border-bottom:1px solid ${tokens.border};padding:18px 28px;">
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
         <tr>
-          <td style="background:${tokens.navy};border-radius:16px 16px 0 0;padding:36px 40px 32px;text-align:center;">
-            <!-- Logo mark -->
-            <table cellpadding="0" cellspacing="0" role="presentation" align="center" style="margin:0 auto 16px;">
+          <td style="vertical-align:middle;">
+            <table cellpadding="0" cellspacing="0" role="presentation">
               <tr>
-                <td style="background:${tokens.accent};border-radius:12px;width:44px;height:44px;text-align:center;vertical-align:middle;">
-                  <span style="color:${tokens.white};font-size:22px;line-height:44px;display:block;">&#9632;</span>
+                <td style="vertical-align:middle;padding-right:10px;">
+                  <img src="https://scaneat.mx/logo.png" alt="ScanEat" width="40" height="40" style="display:block;border-radius:8px;"/>
                 </td>
-                <td style="padding-left:12px;vertical-align:middle;">
-                  <span style="color:${tokens.white};font-size:24px;font-weight:800;letter-spacing:-0.5px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">ScanEat</span>
+                <td style="vertical-align:middle;">
+                  <span style="font-size:18px;font-weight:800;color:${tokens.navy};letter-spacing:-0.5px;">ScanEat</span>
                 </td>
               </tr>
             </table>
-            <!-- Accent pill -->
-            <table cellpadding="0" cellspacing="0" role="presentation" align="center" style="margin:0 auto 14px;">
-              <tr>
-                <td style="background:${tokens.accentLight};border-radius:100px;padding:5px 16px;">
-                  <span style="color:${tokens.accentDark};font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">${lang.subtitle}</span>
-                </td>
-              </tr>
-            </table>
-            <h1 style="margin:0;color:${tokens.white};font-size:26px;font-weight:800;letter-spacing:-0.5px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">${lang.title}</h1>
+          </td>
+          <td align="right" style="vertical-align:middle;">
+            <span style="background:${tokens.accentLight};color:${tokens.accent};font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;padding:5px 12px;border-radius:999px;border:1px solid rgba(221,81,57,0.2);">
+              ● ${lang.title}
+            </span>
           </td>
         </tr>
+      </table>
+    </td>
+  </tr>
 
-        <!-- ── Body ── -->
+  <!-- ── HERO HEADER ── -->
+  <tr>
+    <td style="background:linear-gradient(135deg,${tokens.navy} 0%,#1a2f4a 100%);padding:36px 28px 32px;text-align:center;">
+      <p style="margin:0 0 10px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.5);">${lang.subtitle}</p>
+      <h1 style="margin:0;font-size:28px;font-weight:800;color:${tokens.white};letter-spacing:-0.8px;line-height:1.2;">${lang.title}</h1>
+      <div style="margin-top:16px;display:inline-block;background:rgba(221,81,57,0.15);border:1px solid rgba(221,81,57,0.3);border-radius:999px;padding:6px 16px;">
+        <span style="font-size:12px;font-weight:600;color:${tokens.accent};">scaneat.mx</span>
+      </div>
+    </td>
+  </tr>
+
+  <!-- ── ACCENT LINE ── -->
+  <tr>
+    <td style="height:3px;background:linear-gradient(90deg,transparent,${tokens.accent},transparent);"></td>
+  </tr>
+
+  <!-- ── CONTENT ── -->
+  <tr>
+    <td style="padding:28px 28px 8px;">
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+
+        ${field(lang.labels.name, safeName)}
+        ${field(
+          lang.labels.email,
+          `<a href="mailto:${safeEmail}" style="color:${tokens.accent};text-decoration:none;font-weight:600;">${safeEmail}</a>`
+        )}
+        ${field(lang.labels.restaurant, safeRestaurant)}
+
+        <!-- Message field -->
         <tr>
-          <td style="background:${tokens.white};padding:36px 40px 8px;border-left:1.5px solid ${tokens.border};border-right:1.5px solid ${tokens.border};">
+          <td style="padding:0 0 20px;">
             <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-              ${field(lang.labels.name, name)}
-              ${field(lang.labels.email, `<a href="mailto:${email}" style="color:${tokens.accent};text-decoration:none;font-weight:600;">${email}</a>`)}
-              ${field(lang.labels.restaurant, restaurant)}
-              <!-- Message field — accented -->
               <tr>
-                <td style="padding:0 0 16px;">
-                  <table width="100%" cellpadding="0" cellspacing="0">
-                    <tr>
-                      <td style="background:${tokens.accentLight};border:1.5px solid ${tokens.border};border-left:4px solid ${tokens.accent};border-radius:0 12px 12px 0;padding:18px 22px;">
-                        <p style="margin:0 0 8px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:${tokens.accent};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">${lang.labels.message}</p>
-                        <p style="margin:0;font-size:15px;color:${tokens.navy};line-height:1.65;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">${message.replace(/\n/g, "<br>")}</p>
-                      </td>
-                    </tr>
-                  </table>
+                <td style="background:${tokens.surface};border:1px solid ${tokens.border};border-radius:14px;padding:18px;">
+                  <p style="margin:0 0 8px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:${tokens.muted};">${lang.labels.message}</p>
+                  <p style="margin:0;font-size:15px;font-weight:500;color:${tokens.navy};line-height:1.7;">${safeMessage}</p>
                 </td>
               </tr>
             </table>
-          </td>
-        </tr>
-
-        <!-- ── CTA ── -->
-        <tr>
-          <td style="background:${tokens.white};padding:4px 40px 36px;border-left:1.5px solid ${tokens.border};border-right:1.5px solid ${tokens.border};">
-            <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-              <tr>
-                <td align="center" style="padding-top:8px;">
-                  <a href="mailto:${email}"
-                     style="display:inline-block;background:${tokens.accent};color:${tokens.white};font-size:14px;font-weight:700;text-decoration:none;padding:15px 36px;border-radius:12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;letter-spacing:0.01em;">
-                    ${lang.replyBtn} → ${email}
-                  </a>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-
-        <!-- ── Footer ── -->
-        <tr>
-          <td style="background:${tokens.surface};border:1.5px solid ${tokens.border};border-top:none;border-radius:0 0 16px 16px;padding:20px 40px;text-align:center;">
-            <p style="margin:0 0 6px;font-size:13px;font-weight:700;color:${tokens.navy};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-              <span style="color:${tokens.accent};">Scan</span>Eat · Ecommetrica
-            </p>
-            <p style="margin:0;font-size:12px;color:${tokens.muted};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">${lang.footer}</p>
           </td>
         </tr>
 
       </table>
     </td>
   </tr>
+
+  <!-- ── CTA ── -->
+  <tr>
+    <td align="center" style="padding:8px 28px 32px;">
+      <a href="mailto:${safeEmail}?subject=Re: ScanEat — ${escapeHTML(restaurant)}" style="display:inline-block;background:${tokens.accent};color:${tokens.white};font-size:15px;font-weight:700;text-decoration:none;padding:15px 36px;border-radius:14px;letter-spacing:-0.2px;">
+        ${lang.replyBtn} →
+      </a>
+    </td>
+  </tr>
+
+  <!-- ── FOOTER ── -->
+  <tr>
+    <td style="background:${tokens.surface};border-top:1px solid ${tokens.border};padding:20px 28px;text-align:center;">
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+        <tr>
+          <td align="center">
+            <p style="margin:0 0 6px;font-size:12px;color:${tokens.muted};">${lang.footer}</p>
+            <p style="margin:0;font-size:11px;color:${tokens.border};">© 2025 ScanEat · scaneat.mx</p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
 </table>
+<!-- ── End Wrapper ── -->
+
+</td></tr>
+</table>
+
 </body>
 </html>`;
 }
+// 🧪 TEST
+app.get("/api/test", (req, res) => {
+  res.json({ ok: true });
+});
 
+// 📬 CONTACT
 app.post("/api/contact", async (req, res) => {
-  const { name, email, restaurant, message, locale } = req.body;
-
-  if (!name || !email || !restaurant || !message) {
-    return res.status(400).json({ error: "Todos los campos son requeridos." });
-  }
-
-  const lang = copy[locale] || copy.es;
-
   try {
+    const name = safeText(req.body.name);
+    const email = safeText(req.body.email);
+    const restaurant = safeText(req.body.restaurant);
+    const message = safeText(req.body.message);
+    const rawLocale = safeText(req.body.locale);
+    const locale = rawLocale.startsWith("en") ? "en" : "es";
+
+    if (!name || !email || !restaurant || !message) {
+      return res.status(400).json({ error: "Datos incompletos" });
+    }
+
+    const lang = copy[locale] || copy.es;
+
+    const html = buildEmail({
+      name,
+      email,
+      restaurant,
+      message,
+      locale,
+    });
+
     await transporter.sendMail({
       from: `"ScanEat" <${process.env.EMAIL_SMTP}>`,
       to: process.env.EMAIL_SMTP,
       replyTo: email,
       subject: lang.subject(name, restaurant),
-      html: buildEmail({ name, email, restaurant, message, locale: locale || "es" }),
+      html,
     });
 
     res.json({ ok: true });
   } catch (err) {
-    console.error("SMTP error:", err);
-    res.status(500).json({ error: "Error al enviar el correo." });
+    console.error("ERROR:", err);
+    res.status(500).json({ error: "Error al enviar correo" });
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.listen(process.env.PORT || 4000, () => {
+  console.log("Server running");
 });
