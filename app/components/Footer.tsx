@@ -22,7 +22,7 @@ export default function Footer() {
       links: [
         [nav.faq, "#faq"],
         [nav.contact, "#contact"],
-        ["contact@scaneat.ai", "mailto:contact@scaneat.ai"],
+        ["contact@scaneat.mx", "mailto:contact@scaneat.mx"],
       ],
     },
   ];
@@ -49,10 +49,10 @@ export default function Footer() {
           </p>
           <div className="flex flex-col gap-2">
             <a
-              href="mailto:contact@scaneat.ai"
+              href="mailto:contact@scaneat.mx"
               className="inline-flex items-center gap-2 text-sm text-muted hover:text-accent transition-colors no-underline font-medium"
             >
-              <IconMail size={15} /> contact@scaneat.ai
+              <IconMail size={15} /> contact@scaneat.mx
             </a>
             <span className="inline-flex items-center gap-2 text-sm text-muted font-medium">
               <IconMapPin size={15} /> Tijuana, Baja California

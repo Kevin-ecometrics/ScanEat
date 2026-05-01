@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Ecommetrica" }],
   publisher: "Ecommetrica",
   robots: "index, follow",
-  metadataBase: new URL("https://www.scaneat.ai/"),
+  metadataBase: new URL("https://www.scaneat.mx/"),
   alternates: { canonical: "/" },
   openGraph: {
     title: "ScanEat — Menú Digital para Restaurantes",
@@ -34,9 +34,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={jakarta.variable}>
       <body className="antialiased font-jakarta">
-        <I18nProvider>
-          {children}
-        </I18nProvider>
+        <I18nProvider>{children}</I18nProvider>
       </body>
     </html>
   );

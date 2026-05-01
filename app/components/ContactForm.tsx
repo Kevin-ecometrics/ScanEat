@@ -21,12 +21,14 @@ const TRUST = ["Sin tarjeta de crédito", "Respuesta en 24h", "Demo gratuita"];
 export default function ContactForm() {
   const { t, locale } = useI18n();
   const c = t.contact;
+
   const [form, setForm] = useState({
     name: "",
     email: "",
     restaurant: "",
     message: "",
   });
+
   const [status, setStatus] = useState<FormState>("idle");
 
   function handleChange(
@@ -37,15 +39,28 @@ export default function ContactForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    if (status === "sending") return;
+
     setStatus("sending");
+
     try {
-      await axios.post("https://www.scaneat.mx/api/contact", {
-        ...form,
-        locale,
-      });
+      await axios.post(
+        "https://www.scaneat.mx/api/contact",
+        {
+          ...form,
+          locale: locale?.startsWith("en") ? "en" : "es",
+        },
+        {
+          timeout: 10000,
+        },
+      );
+
       setStatus("sent");
       setForm({ name: "", email: "", restaurant: "", message: "" });
-    } catch {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      console.error("ERROR FRONT:", err?.response || err);
       setStatus("error");
     }
   }
@@ -57,21 +72,21 @@ export default function ContactForm() {
     <section id="contact" className="py-28 px-6 bg-[oklch(99.2%_0.004_80)]">
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-          {/* Left — copy */}
           <div className="lg:col-span-2 lg:sticky lg:top-28">
             <Reveal>
               <span className="inline-flex items-center gap-1.5 bg-accent-light text-accent text-[11px] font-bold uppercase tracking-[0.12em] px-4 py-1.5 rounded-full mb-6 border border-accent/20">
                 <IconStar size={11} /> {c.badge}
               </span>
+
               <h2 className="text-[clamp(30px,4vw,48px)] font-extrabold tracking-[-1.5px] text-navy leading-tight mb-5">
                 {c.headline}{" "}
                 <span className="text-accent">{c.headlineAccent}</span>
               </h2>
+
               <p className="text-muted text-base leading-relaxed mb-8">
                 {c.sub}
               </p>
 
-              {/* Trust list */}
               <div className="flex flex-col gap-3">
                 {TRUST.map((item) => (
                   <div key={item} className="flex items-center gap-3">
@@ -85,22 +100,20 @@ export default function ContactForm() {
                 ))}
               </div>
 
-              {/* Contact info */}
               <div className="mt-10 pt-8 border-t border-border">
                 <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted mb-3">
                   Contacto directo
                 </p>
                 <a
-                  href="mailto:contact@scaneat.ai"
+                  href="mailto:contact@scaneat.mx"
                   className="inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-accent transition-colors no-underline"
                 >
-                  <IconMail size={15} /> contact@scaneat.ai
+                  <IconMail size={15} /> contact@scaneat.mx
                 </a>
               </div>
             </Reveal>
           </div>
 
-          {/* Right — form */}
           <div className="lg:col-span-3">
             <Reveal delay={0.1}>
               <form
@@ -125,6 +138,7 @@ export default function ContactForm() {
                       className={inputClass}
                     />
                   </div>
+
                   <div className="flex flex-col gap-2">
                     <label className="text-[11px] font-bold text-navy uppercase tracking-[0.1em] flex items-center gap-1.5">
                       <span className="text-accent">
@@ -169,6 +183,7 @@ export default function ContactForm() {
                   <textarea
                     name="message"
                     rows={5}
+                    required
                     placeholder={c.fields.messagePlaceholder}
                     value={form.message}
                     onChange={handleChange}
@@ -187,12 +202,15 @@ export default function ContactForm() {
                       {c.sending}
                     </span>
                   )}
+
                   {status === "sent" && (
                     <span className="flex items-center gap-2">
                       <IconCheck size={18} /> {c.sent}
                     </span>
                   )}
+
                   {status === "error" && c.error}
+
                   {status === "idle" && (
                     <>
                       {c.cta} <IconArrow size={17} />
@@ -209,11 +227,12 @@ export default function ContactForm() {
                     {c.successMsg}
                   </motion.p>
                 )}
+
                 {status === "error" && (
                   <p className="text-center text-sm text-red-500 font-semibold">
                     {c.errorMsg}{" "}
-                    <a href="mailto:contact@scaneat.ai" className="underline">
-                      contact@scaneat.ai
+                    <a href="mailto:contact@scaneat.mx" className="underline">
+                      contact@scaneat.mx
                     </a>
                   </p>
                 )}
