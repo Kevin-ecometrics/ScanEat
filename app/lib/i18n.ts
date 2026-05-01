@@ -14,7 +14,7 @@ export const translations = {
       headline1: "¿Tienes restaurante?",
       headline2: "Tienes ScanEat.",
       sub1: "La forma más rápida de potenciar tu servicio y ganar más.",
-      sub2: "Ustedes ya son los maestros de la cocina — ahora también expertos en gestión. Con la mejor web app, transformamos su talento en un negocio más ágil y rentable.",
+      sub2: "Ustedes ya son los maestros de la cocina, ahora también expertos en gestión. Con la mejor web app, transformamos su talento en un negocio más ágil y rentable.",
       cta1: "Comenzar gratis",
       cta2: "Ver demo",
     },
@@ -38,7 +38,7 @@ export const translations = {
         {
           tag: "Sin fricciones",
           title: "Cuentas claras y cobros fluidos",
-          desc: "¿Tarjeta o efectivo? ¿Cuentas juntas o separadas? No hay problema — tus totales al instante cierran la mesa suave y eficiente.",
+          desc: "¿Tarjeta o efectivo? ¿Cuentas juntas o separadas? No hay problema, cierra la mesa suave y eficiente.",
         },
       ],
     },
@@ -46,7 +46,7 @@ export const translations = {
       badge: "Para cada rol",
       headline: "Una app pensada para",
       headlineAccent: "todos en tu restaurante",
-      sub: "Administra todo, ve en vivo cómo van tus mesas — esto te ayudará a mejorar estrategias para aumentar ventas, disminuir el tiempo y elevar calificaciones.",
+      sub: "Administra todo, ve en vivo cómo van tus mesas, esto te ayudará a mejorar estrategias para aumentar ventas, disminuir el tiempo y elevar calificaciones.",
       roles: [
         {
           role: "Meseros & Hostess",
@@ -79,7 +79,7 @@ export const translations = {
             "Pedido directo desde la mesa sin esperar",
             "Notificación cuando su orden está lista",
             "Calificación del servicio al finalizar",
-            "Sin app — solo cámara y QR",
+            "Sin app solo cámara y QR",
           ],
         },
       ],
@@ -105,7 +105,7 @@ export const translations = {
     benefits: {
       headline: "Más beneficios de",
       headlineAccent: "la web app",
-      sub: "No sacrifiques la calidad — invierte en tecnología para mejorar tus utilidades.",
+      sub: "No sacrifiques la calidad, invierte en tecnología para mejorar tus utilidades.",
       ctaBannerSub: "Mayor eficiencia, más ventas.",
       ctaBannerHeadline: "Es hora de cambiar la estrategia.",
       ctaBannerSub2: "Sube el nivel de tu gestión con ScanEat.",
@@ -113,7 +113,7 @@ export const translations = {
       items: [
         {
           title: "Soporte cercano",
-          desc: "Soporte técnico y telefónico. No importa dónde estés — estamos a una llamada o un mensaje de distancia para resolver cualquier duda al instante.",
+          desc: "Soporte técnico y telefónico. No importa dónde estés, estamos a una llamada o un mensaje de distancia para resolver cualquier duda al instante.",
           note: "Oficina física en Tijuana, Baja California",
         },
         {
@@ -140,10 +140,10 @@ export const translations = {
       headline: "¿Preguntas?",
       headlineAccent: "Comencemos.",
       items: [
-        { q: "¿Cómo se instala y qué necesito?", a: "Es una web app — solo necesitas conexión a Internet y una impresora para tus QRs, y listo. No hay nada que descargar ni instalar." },
-        { q: "¿Qué sigue después de contratar?", a: "Te damos un dominio y creamos tu base de datos en la nube para que esté lista. Tú te encargas de personalizar tu menú, crear tus mesas y tus QRs — ¡y está listo para usarse!" },
+        { q: "¿Cómo se instala y qué necesito?", a: "Es una web app; solo necesitas conexión a Internet y una impresora para tus QRs, y listo." },
+        { q: "¿Qué sigue después de contratar?", a: "Te damos un dominio y creamos tu base de datos en la nube para que esté lista. Tú te encargas de personalizar tu menú, crear tus mesas y tus QRs ¡y está listo para usarse!" },
         { q: "¿Cuántos usuarios puedo tener?", a: "Usuarios ilimitados para administradores, meseros y, por supuesto, tus comensales." },
-        { q: "¿Dónde se puede usar?", a: "En cualquier dispositivo — celular, tablet, computadora — con internet y un navegador. iOS, Android, Windows, Mac. No importa." },
+        { q: "¿Dónde se puede usar?", a: "En cualquier dispositivo celular, tablet, computadora con internet y un navegador. iOS, Android, Windows, Mac, todos son bienvenidos." },
         { q: "¿Cómo funcionan las calificaciones de clientes?", a: "Las reseñas son calificaciones que cada cliente puede dejar después de su servicio. Esta calificación y los comentarios permiten identificar y atacar áreas de oportunidad para mejorar continuamente." },
         { q: "¿Hay costos ocultos o cargos por actualización?", a: "No. Las actualizaciones y mejoras son tuyas, totalmente gratis. El precio mensual lo es todo." },
       ],
@@ -189,7 +189,7 @@ export const translations = {
       headline1: "You have a restaurant?",
       headline2: "You have ScanEat.",
       sub1: "The fastest way to boost your service and earn more.",
-      sub2: "You are already masters of the kitchen — now become experts in management too. With the best web app, we turn your talent into a more agile and profitable business.",
+      sub2: "You are already masters of the kitchen, now become experts in management too. With the best web app, we turn your talent into a more agile and profitable business.",
       cta1: "Start for free",
       cta2: "Watch demo",
     },
@@ -213,7 +213,7 @@ export const translations = {
         {
           tag: "Frictionless",
           title: "Clear bills, smooth payments",
-          desc: "Card or cash? Split or together? No problem — instant totals close the table smoothly and efficiently.",
+          desc: "Card or cash? Split or together? No problem, close the table smoothly and efficiently.",
         },
       ],
     },
@@ -221,7 +221,7 @@ export const translations = {
       badge: "For every role",
       headline: "An app built for",
       headlineAccent: "everyone in your restaurant",
-      sub: "Manage everything, see your tables live — this will help you improve strategies to increase sales, reduce time, and raise ratings.",
+      sub: "Manage everything, see your tables live, this will help you improve strategies to increase sales, reduce time, and raise ratings.",
       roles: [
         {
           role: "Waitstaff & Hostess",
@@ -251,10 +251,10 @@ export const translations = {
           headline: "Receive instant notifications about the status of their dishes.",
           features: [
             "Interactive menu from their phone",
-            "Order directly from the table — no waiting",
+            "Order directly from the table, no waiting",
             "Notification when their order is ready",
             "Service rating at the end",
-            "No app — just camera and QR",
+            "No app just camera and QR",
           ],
         },
       ],
@@ -280,7 +280,7 @@ export const translations = {
     benefits: {
       headline: "More benefits of",
       headlineAccent: "the web app",
-      sub: "Don't sacrifice quality — invest in technology to improve your profits.",
+      sub: "Don't sacrifice quality, invest in technology to improve your profits.",
       ctaBannerSub: "Greater efficiency, more sales.",
       ctaBannerHeadline: "Time to change the strategy.",
       ctaBannerSub2: "Level up your management with ScanEat.",
@@ -288,7 +288,7 @@ export const translations = {
       items: [
         {
           title: "Close support",
-          desc: "Technical and phone support. No matter where you are — we are one call or message away to solve any question instantly.",
+          desc: "Technical and phone support. No matter where you are, we are one call or message away to solve any question instantly.",
           note: "Physical office in Tijuana, Baja California",
         },
         {
@@ -315,10 +315,10 @@ export const translations = {
       headline: "Questions?",
       headlineAccent: "Let's get started.",
       items: [
-        { q: "How is it installed and what do I need?", a: "It's a web app — you only need an internet connection and a printer for your QRs. Nothing to download or install." },
-        { q: "What happens after signing up?", a: "We give you a domain and create your cloud database ready to go. You take care of customizing your menu, creating your tables and QRs — and it's ready to use!" },
+        { q: "How is it installed and what do I need?", a: "It's a web app; you only need an internet connection and a printer for your QRs, and you're set." },
+        { q: "What happens after signing up?", a: "We give you a domain and create your cloud database ready to go. You take care of customizing your menu, creating your tables and QRs and it's ready to use!" },
         { q: "How many users can I have?", a: "Unlimited users for administrators, waitstaff, and of course your guests." },
-        { q: "Where can it be used?", a: "On any device — phone, tablet, computer — with internet and a browser. iOS, Android, Windows, Mac. No matter what." },
+        { q: "Where can it be used?", a: "On any device phone, tablet, computer with internet and a browser. iOS, Android, Windows, Mac, all are welcome." },
         { q: "How do guest ratings work?", a: "Reviews are ratings each guest can leave after their service. These ratings and comments help identify and address areas for improvement continuously." },
         { q: "Are there hidden costs or update fees?", a: "No. Updates and improvements are yours, completely free. The monthly price is all there is." },
       ],
