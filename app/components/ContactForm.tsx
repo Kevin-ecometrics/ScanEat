@@ -3,25 +3,35 @@
 import { useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
-import { IconStar, IconArrow, IconUser, IconMail, IconMessage, IconCheck } from "./icons";
+import {
+  IconStar,
+  IconArrow,
+  IconUser,
+  IconMail,
+  IconMessage,
+  IconCheck,
+} from "./icons";
 import { Reveal } from "./Reveal";
 import { useI18n } from "../providers/I18nProvider";
 
 type FormState = "idle" | "sending" | "sent" | "error";
 
-const TRUST = [
-  "Sin tarjeta de crédito",
-  "Respuesta en 24h",
-  "Demo gratuita",
-];
+const TRUST = ["Sin tarjeta de crédito", "Respuesta en 24h", "Demo gratuita"];
 
 export default function ContactForm() {
   const { t, locale } = useI18n();
   const c = t.contact;
-  const [form, setForm] = useState({ name: "", email: "", restaurant: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    restaurant: "",
+    message: "",
+  });
   const [status, setStatus] = useState<FormState>("idle");
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
@@ -29,7 +39,10 @@ export default function ContactForm() {
     e.preventDefault();
     setStatus("sending");
     try {
-      await axios.post("http://localhost:4000/api/contact", { ...form, locale });
+      await axios.post("https://www.scaneat.mx/api/contact", {
+        ...form,
+        locale,
+      });
       setStatus("sent");
       setForm({ name: "", email: "", restaurant: "", message: "" });
     } catch {
@@ -43,9 +56,7 @@ export default function ContactForm() {
   return (
     <section id="contact" className="py-28 px-6 bg-[oklch(99.2%_0.004_80)]">
       <div className="max-w-5xl mx-auto">
-
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-
           {/* Left — copy */}
           <div className="lg:col-span-2 lg:sticky lg:top-28">
             <Reveal>
@@ -56,7 +67,9 @@ export default function ContactForm() {
                 {c.headline}{" "}
                 <span className="text-accent">{c.headlineAccent}</span>
               </h2>
-              <p className="text-muted text-base leading-relaxed mb-8">{c.sub}</p>
+              <p className="text-muted text-base leading-relaxed mb-8">
+                {c.sub}
+              </p>
 
               {/* Trust list */}
               <div className="flex flex-col gap-3">
@@ -65,14 +78,18 @@ export default function ContactForm() {
                     <span className="w-6 h-6 rounded-full bg-accent/10 text-accent flex items-center justify-center flex-shrink-0">
                       <IconCheck size={12} />
                     </span>
-                    <span className="text-sm font-semibold text-navy">{item}</span>
+                    <span className="text-sm font-semibold text-navy">
+                      {item}
+                    </span>
                   </div>
                 ))}
               </div>
 
               {/* Contact info */}
               <div className="mt-10 pt-8 border-t border-border">
-                <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted mb-3">Contacto directo</p>
+                <p className="text-xs font-bold uppercase tracking-[0.12em] text-muted mb-3">
+                  Contacto directo
+                </p>
                 <a
                   href="mailto:contact@scaneat.ai"
                   className="inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-accent transition-colors no-underline"
@@ -93,7 +110,9 @@ export default function ContactForm() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="flex flex-col gap-2">
                     <label className="text-[11px] font-bold text-navy uppercase tracking-[0.1em] flex items-center gap-1.5">
-                      <span className="text-accent"><IconUser size={13} /></span>
+                      <span className="text-accent">
+                        <IconUser size={13} />
+                      </span>
                       {c.fields.name}
                     </label>
                     <input
@@ -108,7 +127,9 @@ export default function ContactForm() {
                   </div>
                   <div className="flex flex-col gap-2">
                     <label className="text-[11px] font-bold text-navy uppercase tracking-[0.1em] flex items-center gap-1.5">
-                      <span className="text-accent"><IconMail size={13} /></span>
+                      <span className="text-accent">
+                        <IconMail size={13} />
+                      </span>
                       {c.fields.email}
                     </label>
                     <input
@@ -140,7 +161,9 @@ export default function ContactForm() {
 
                 <div className="flex flex-col gap-2">
                   <label className="text-[11px] font-bold text-navy uppercase tracking-[0.1em] flex items-center gap-1.5">
-                    <span className="text-accent"><IconMessage size={13} /></span>
+                    <span className="text-accent">
+                      <IconMessage size={13} />
+                    </span>
                     {c.fields.message}
                   </label>
                   <textarea
@@ -170,7 +193,11 @@ export default function ContactForm() {
                     </span>
                   )}
                   {status === "error" && c.error}
-                  {status === "idle" && <>{c.cta} <IconArrow size={17} /></>}
+                  {status === "idle" && (
+                    <>
+                      {c.cta} <IconArrow size={17} />
+                    </>
+                  )}
                 </button>
 
                 {status === "sent" && (
@@ -185,13 +212,14 @@ export default function ContactForm() {
                 {status === "error" && (
                   <p className="text-center text-sm text-red-500 font-semibold">
                     {c.errorMsg}{" "}
-                    <a href="mailto:contact@scaneat.ai" className="underline">contact@scaneat.ai</a>
+                    <a href="mailto:contact@scaneat.ai" className="underline">
+                      contact@scaneat.ai
+                    </a>
                   </p>
                 )}
               </form>
             </Reveal>
           </div>
-
         </div>
       </div>
     </section>
