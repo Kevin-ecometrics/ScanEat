@@ -16,11 +16,16 @@ import { useI18n } from "../providers/I18nProvider";
 
 type FormState = "idle" | "sending" | "sent" | "error";
 
-const TRUST = ["Sin tarjeta de crédito", "Respuesta en 24h", "Demo gratuita"];
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://www.scaneat.mx";
+
+const TRUST_ES = ["Sin tarjeta de crédito", "Respuesta en 24h", "Demo gratuita"];
+const TRUST_EN = ["No credit card", "Reply in 24h", "Free demo"];
 
 export default function ContactForm() {
   const { t, locale } = useI18n();
   const c = t.contact;
+
+  const TRUST = locale?.startsWith("en") ? TRUST_EN : TRUST_ES;
 
   const [form, setForm] = useState({
     name: "",
@@ -46,7 +51,7 @@ export default function ContactForm() {
 
     try {
       await axios.post(
-        "https://www.scaneat.mx/api/contact",
+        `${API_URL}/api/demo/request`,
         {
           ...form,
           locale: locale?.startsWith("en") ? "en" : "es",
@@ -60,7 +65,13 @@ export default function ContactForm() {
       setForm({ name: "", email: "", restaurant: "", message: "" });
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
-      console.error("ERROR FRONT:", err?.response || err);
+      const detail = {
+        message: err?.message,
+        status: err?.response?.status,
+        data: err?.response?.data,
+        url: `${API_URL}/api/demo/request`,
+      };
+      console.error("ERROR FRONT:", detail);
       setStatus("error");
     }
   }
@@ -98,6 +109,12 @@ export default function ContactForm() {
                     </span>
                   </div>
                 ))}
+              </div>
+
+              <div className="mt-6 px-4 py-3 bg-accent-light/50 border border-accent/20 rounded-xl">
+                <p className="text-xs font-bold text-accent text-center">
+                  🔒 {c.demoNote}
+                </p>
               </div>
 
               <div className="mt-10 pt-8 border-t border-border">
@@ -183,7 +200,6 @@ export default function ContactForm() {
                   <textarea
                     name="message"
                     rows={5}
-                    required
                     placeholder={c.fields.messagePlaceholder}
                     value={form.message}
                     onChange={handleChange}
@@ -219,13 +235,15 @@ export default function ContactForm() {
                 </button>
 
                 {status === "sent" && (
-                  <motion.p
+                  <motion.div
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="text-center text-sm text-accent font-semibold"
+                    className="text-center"
                   >
-                    {c.successMsg}
-                  </motion.p>
+                    <div className="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-700 text-sm font-bold px-5 py-3 rounded-xl mb-2">
+                      <IconCheck size={18} /> {c.successMsg}
+                    </div>
+                  </motion.div>
                 )}
 
                 {status === "error" && (

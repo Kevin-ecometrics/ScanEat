@@ -2,6 +2,8 @@
 const express = require("express");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
+const crypto = require("crypto");
+const mysql = require("mysql2/promise");
 
 const app = express();
 
@@ -18,6 +20,36 @@ const escapeHTML = (str) => {
     .replace(/>/g, "&gt;");
 };
 
+// ── MySQL Connection ──
+let db = null;
+
+async function initDB() {
+  db = await mysql.createConnection({
+    host: process.env.DB_HOST || "localhost",
+    user: process.env.DB_USER || "root",
+    password: process.env.DB_PASS || "",
+    database: process.env.DB_NAME || "scaneat",
+  });
+
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS demo_requests (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      name VARCHAR(100) NOT NULL,
+      email VARCHAR(255) NOT NULL,
+      restaurant VARCHAR(255) NOT NULL,
+      message TEXT,
+      locale VARCHAR(5) DEFAULT 'es',
+      token VARCHAR(64) UNIQUE NOT NULL,
+      status ENUM('pending','approved','rejected','completed','failed') DEFAULT 'pending',
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    )
+  `);
+
+  console.log("✓ MySQL conectado y tabla demo_requests lista");
+}
+
+// ── Nodemailer ──
 const transporter = nodemailer.createTransport({
   host: process.env.HOST_SMTP,
   port: Number(process.env.PORT_SMTP),
@@ -270,6 +302,130 @@ app.post("/api/contact", async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT || 4000, () => {
-  console.log("Server running");
+// 📬 DEMO REQUEST
+app.post("/api/demo/request", async (req, res) => {
+  try {
+    const name = safeText(req.body.name);
+    const email = safeText(req.body.email);
+    const restaurant = safeText(req.body.restaurant);
+    const message = safeText(req.body.message);
+    const rawLocale = safeText(req.body.locale);
+    const locale = rawLocale.startsWith("en") ? "en" : "es";
+
+    if (!name || !email || !restaurant) {
+      return res.status(400).json({ error: "Nombre, email y restaurante son requeridos" });
+    }
+
+    const token = crypto.randomBytes(32).toString("hex");
+
+    await db.execute(
+      "INSERT INTO demo_requests (name, email, restaurant, message, locale, token) VALUES (?, ?, ?, ?, ?, ?)",
+      [name, email, restaurant, message, locale, token]
+    );
+
+    const lang = copy[locale] || copy.es;
+
+    const html = buildEmail({
+      name,
+      email,
+      restaurant,
+      message: message || "Solicitud de demo",
+      locale,
+    });
+
+    await transporter.sendMail({
+      from: `"ScanEat" <${process.env.EMAIL_SMTP}>`,
+      to: process.env.EMAIL_SMTP,
+      replyTo: email,
+      subject: lang.subject(name, restaurant),
+      html,
+    });
+
+    res.json({ ok: true, token });
+  } catch (err) {
+    console.error("ERROR DEMO REQUEST:", err);
+    res.status(500).json({ error: "Error al procesar la solicitud de demo" });
+  }
+});
+
+// 🔍 DEMO STATUS
+app.get("/api/demo/status/:token", async (req, res) => {
+  try {
+    const [rows] = await db.execute(
+      "SELECT name, email, restaurant, status, created_at FROM demo_requests WHERE token = ?",
+      [req.params.token]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: "Solicitud no encontrada" });
+    }
+
+    res.json(rows[0]);
+  } catch (err) {
+    console.error("ERROR DEMO STATUS:", err);
+    res.status(500).json({ error: "Error al consultar estado" });
+  }
+});
+
+// 📋 DEMO REQUESTS LIST (admin)
+app.get("/api/demo/requests", async (req, res) => {
+  try {
+    let sql = "SELECT id, name, email, restaurant, message, locale, token, status, created_at FROM demo_requests";
+    const params = [];
+
+    if (req.query.status) {
+      sql += " WHERE status = ?";
+      params.push(req.query.status);
+    }
+
+    sql += " ORDER BY created_at DESC";
+
+    if (req.query.limit) {
+      sql += " LIMIT ?";
+      params.push(Number(req.query.limit));
+    }
+
+    const [rows] = await db.execute(sql, params);
+    res.json(rows);
+  } catch (err) {
+    console.error("ERROR DEMO REQUESTS:", err);
+    res.status(500).json({ error: "Error al obtener solicitudes" });
+  }
+});
+
+// ✅ PATCH DEMO STATUS (admin)
+app.patch("/api/demo/requests/:id/status", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const validStatuses = ["pending", "approved", "rejected", "completed", "failed"];
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({ error: `Estado inválido. Valores: ${validStatuses.join(", ")}` });
+    }
+
+    const [result] = await db.execute(
+      "UPDATE demo_requests SET status = ? WHERE id = ?",
+      [status, id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Solicitud no encontrada" });
+    }
+
+    res.json({ ok: true, status });
+  } catch (err) {
+    console.error("ERROR PATCH DEMO STATUS:", err);
+    res.status(500).json({ error: "Error al actualizar estado" });
+  }
+});
+
+// ── Init DB then start server ──
+initDB().then(() => {
+  app.listen(process.env.PORT || 4000, () => {
+    console.log("Server running", process.env.PORT || 4000);
+  });
+}).catch((err) => {
+  console.error("Error conectando a MySQL:", err);
+  process.exit(1);
 });

@@ -7,7 +7,7 @@ export const translations = {
       packages: "Paquetes",
       faq: "FAQ",
       contact: "Contacto",
-      demo: "Solicitar demo",
+      demo: "Probar demo",
     },
     hero: {
       badge: "Web App para Restaurantes",
@@ -15,8 +15,8 @@ export const translations = {
       headline2: "Tienes ScanEat.",
       sub1: "La forma más rápida de potenciar tu servicio y ganar más.",
       sub2: "Ustedes ya son los maestros de la cocina, ahora también expertos en gestión. Con la mejor web app, transformamos su talento en un negocio más ágil y rentable.",
-      cta1: "Comenzar gratis",
-      cta2: "Ver demo",
+      cta1: "Probar demo gratis",
+      cta2: "Ver video",
     },
     why: {
       badge: "¿Por qué ScanEat?",
@@ -91,7 +91,7 @@ export const translations = {
       sub: "Reduce errores operativos, controla tus costos, optimiza tu nómina y recupera tu tranquilidad.",
       reporterLabel: "Incluye App Reportador",
       comingSoon: "*Próximamente: terminal de pago integrada",
-      cta: "Solicitar precio",
+      cta: "Probar demo",
       includes: [
         { title: "Portal administrativo", desc: "Reportes y monitoreo en vivo de mesas, gestión de ingresos, cierres y cortes." },
         { title: "Módulo KDS", desc: "Kitchen Display System: comandas en orden para coordinación fluida en cocina y barra." },
@@ -131,9 +131,9 @@ export const translations = {
       ],
     },
     ctas: [
-      { label: "Si tienes ScanEat,", headline: "tienes todo listo", cta: "Únete hoy" },
-      { label: "Mayor eficiencia,", headline: "Más ventas.", sub: "Solo con ScanEat.", cta: "Haz tu prueba", featured: true },
-      { label: "El combo ganador:", headline: "Ustedes los platillos, ScanEat el orden.", cta: "Comienza hoy" },
+      { label: "Demo gratuita", headline: "Prueba ScanEat sin costo", cta: "Solicitar demo" },
+      { label: "Descubre ScanEat", headline: "Agiliza tu restaurante.", sub: "Empieza hoy.", cta: "Probar demo", featured: true },
+      { label: "Sin compromiso", headline: "Actívalo cuando quieras", cta: "Ver demo" },
     ],
     faq: {
       badge: "Preguntas frecuentes",
@@ -149,10 +149,10 @@ export const translations = {
       ],
     },
     contact: {
-      badge: "Empieza hoy",
-      headline: "Menos costos,",
-      headlineAccent: "más utilidades",
-      sub: "Cuéntanos sobre tu restaurante y te contactamos en menos de 24 horas.",
+      badge: "Demo gratuita",
+      headline: "Prueba ScanEat",
+      headlineAccent: "sin compromiso",
+      sub: "Cuéntanos sobre tu restaurante y te enviaremos tu demo personalizada.",
       fields: {
         name: "Tu nombre",
         namePlaceholder: "Juan García",
@@ -160,15 +160,17 @@ export const translations = {
         emailPlaceholder: "juan@mirestaurante.com",
         restaurant: "Nombre del restaurante",
         restaurantPlaceholder: "La Trattoria del Centro",
-        message: "Mensaje",
+        message: "Mensaje (opcional)",
         messagePlaceholder: "Cuéntanos sobre tu restaurante, número de mesas, necesidades...",
       },
       sending: "Enviando...",
-      sent: "¡Mensaje enviado!",
+      sent: "¡Solicitud enviada!",
       error: "Error, intenta de nuevo",
       cta: "Solicitar demo",
-      successMsg: "Te contactamos en menos de 24 horas.",
+      successMsg: "Recibimos tu solicitud de demo. Te contactaremos pronto.",
       errorMsg: "Algo salió mal. Escríbenos a",
+      demoBadge: "Sin compromiso",
+      demoNote: "No necesitas tarjeta de crédito",
     },
     footer: {
       rights: "© 2026 ScanEat · Ecommetrica · Todos los derechos reservados.",
@@ -182,7 +184,7 @@ export const translations = {
       packages: "Packages",
       faq: "FAQ",
       contact: "Contact",
-      demo: "Request demo",
+      demo: "Try demo",
     },
     hero: {
       badge: "Web App for Restaurants",
@@ -190,8 +192,8 @@ export const translations = {
       headline2: "You have ScanEat.",
       sub1: "The fastest way to boost your service and earn more.",
       sub2: "You are already masters of the kitchen, now become experts in management too. With the best web app, we turn your talent into a more agile and profitable business.",
-      cta1: "Start for free",
-      cta2: "Watch demo",
+      cta1: "Try demo free",
+      cta2: "Watch video",
     },
     why: {
       badge: "Why ScanEat?",
@@ -266,7 +268,7 @@ export const translations = {
       sub: "Reduce operational errors, control costs, optimize payroll, and get your peace of mind back.",
       reporterLabel: "Includes Reporter App",
       comingSoon: "*Coming soon: integrated payment terminal",
-      cta: "Request pricing",
+      cta: "Try demo",
       includes: [
         { title: "Admin portal", desc: "Live table reports and monitoring, revenue management, closings, and cuts." },
         { title: "KDS module", desc: "Kitchen Display System: ordered tickets for smooth coordination in kitchen and bar." },
@@ -306,9 +308,9 @@ export const translations = {
       ],
     },
     ctas: [
-      { label: "If you have ScanEat,", headline: "you have everything ready", cta: "Join today" },
-      { label: "Greater efficiency,", headline: "More sales.", sub: "Only with ScanEat.", cta: "Try it now", featured: true },
-      { label: "The winning combo:", headline: "You bring the dishes, ScanEat brings the order.", cta: "Start today" },
+      { label: "Free demo", headline: "Try ScanEat at no cost", cta: "Request demo" },
+      { label: "Discover ScanEat", headline: "Streamline your restaurant.", sub: "Start today.", cta: "Try demo", featured: true },
+      { label: "No commitment", headline: "Activate whenever you want", cta: "Watch demo" },
     ],
     faq: {
       badge: "Frequently asked questions",
@@ -324,10 +326,10 @@ export const translations = {
       ],
     },
     contact: {
-      badge: "Start today",
-      headline: "Less costs,",
-      headlineAccent: "more profits",
-      sub: "Tell us about your restaurant and we'll contact you within 24 hours.",
+      badge: "Free demo",
+      headline: "Try ScanEat",
+      headlineAccent: "no strings attached",
+      sub: "Tell us about your restaurant and we'll send you a personalized demo.",
       fields: {
         name: "Your name",
         namePlaceholder: "John Smith",
@@ -335,15 +337,17 @@ export const translations = {
         emailPlaceholder: "john@myrestaurant.com",
         restaurant: "Restaurant name",
         restaurantPlaceholder: "The Downtown Trattoria",
-        message: "Message",
+        message: "Message (optional)",
         messagePlaceholder: "Tell us about your restaurant, number of tables, needs...",
       },
       sending: "Sending...",
-      sent: "Message sent!",
+      sent: "Request sent!",
       error: "Error, please try again",
       cta: "Request demo",
-      successMsg: "We'll contact you within 24 hours.",
+      successMsg: "We received your demo request. We'll be in touch soon.",
       errorMsg: "Something went wrong. Email us at",
+      demoBadge: "No commitment",
+      demoNote: "No credit card required",
     },
     footer: {
       rights: "© 2026 ScanEat · Ecommetrica · All rights reserved.",
@@ -361,6 +365,6 @@ export type Translations = {
   benefits: { headline: string; headlineAccent: string; sub: string; ctaBannerSub: string; ctaBannerHeadline: string; ctaBannerSub2: string; ctaBannerBtn: string; items: { title: string; desc: string; note?: string }[] };
   ctas: { label: string; headline: string; sub?: string; cta: string; featured?: boolean }[];
   faq: { badge: string; headline: string; headlineAccent: string; items: { q: string; a: string }[] };
-  contact: { badge: string; headline: string; headlineAccent: string; sub: string; fields: { name: string; namePlaceholder: string; email: string; emailPlaceholder: string; restaurant: string; restaurantPlaceholder: string; message: string; messagePlaceholder: string }; sending: string; sent: string; error: string; cta: string; successMsg: string; errorMsg: string };
+  contact: { badge: string; headline: string; headlineAccent: string; sub: string; fields: { name: string; namePlaceholder: string; email: string; emailPlaceholder: string; restaurant: string; restaurantPlaceholder: string; message: string; messagePlaceholder: string }; sending: string; sent: string; error: string; cta: string; successMsg: string; errorMsg: string; demoBadge: string; demoNote: string };
   footer: { rights: string; location: string };
 };
