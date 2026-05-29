@@ -14,7 +14,7 @@ import {
 import { Reveal } from "./Reveal";
 import { useI18n } from "../providers/I18nProvider";
 
-type FormState = "idle" | "sending" | "sent" | "error";
+type FormState = "idle" | "sending" | "sent" | "error" | "duplicate";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://www.scaneat.mx";
 
@@ -72,7 +72,12 @@ export default function ContactForm() {
         url: `${API_URL}/api/demo/request`,
       };
       console.error("ERROR FRONT:", detail);
-      setStatus("error");
+
+      if (err?.response?.status === 409) {
+        setStatus("duplicate");
+      } else {
+        setStatus("error");
+      }
     }
   }
 
@@ -225,7 +230,7 @@ export default function ContactForm() {
                     </span>
                   )}
 
-                  {status === "error" && c.error}
+                  {(status === "error" || status === "duplicate") && c.error}
 
                   {status === "idle" && (
                     <>
@@ -253,6 +258,18 @@ export default function ContactForm() {
                       contact@scaneat.mx
                     </a>
                   </p>
+                )}
+
+                {status === "duplicate" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center"
+                  >
+                    <div className="inline-flex items-center gap-2 bg-amber-50 border border-amber-200 text-amber-700 text-sm font-bold px-5 py-3 rounded-xl">
+                      {c.duplicate}
+                    </div>
+                  </motion.div>
                 )}
               </form>
             </Reveal>

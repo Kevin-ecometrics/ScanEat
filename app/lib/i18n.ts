@@ -166,6 +166,7 @@ export const translations = {
       sending: "Enviando...",
       sent: "¡Solicitud enviada!",
       error: "Error, intenta de nuevo",
+      duplicate: "Ya existe una solicitud para este restaurante con ese correo",
       cta: "Solicitar demo",
       successMsg: "Recibimos tu solicitud de demo. Te contactaremos pronto.",
       errorMsg: "Algo salió mal. Escríbenos a",
@@ -343,6 +344,7 @@ export const translations = {
       sending: "Sending...",
       sent: "Request sent!",
       error: "Error, please try again",
+      duplicate: "A request already exists for this restaurant with this email",
       cta: "Request demo",
       successMsg: "We received your demo request. We'll be in touch soon.",
       errorMsg: "Something went wrong. Email us at",
@@ -365,6 +367,6 @@ export type Translations = {
   benefits: { headline: string; headlineAccent: string; sub: string; ctaBannerSub: string; ctaBannerHeadline: string; ctaBannerSub2: string; ctaBannerBtn: string; items: { title: string; desc: string; note?: string }[] };
   ctas: { label: string; headline: string; sub?: string; cta: string; featured?: boolean }[];
   faq: { badge: string; headline: string; headlineAccent: string; items: { q: string; a: string }[] };
-  contact: { badge: string; headline: string; headlineAccent: string; sub: string; fields: { name: string; namePlaceholder: string; email: string; emailPlaceholder: string; restaurant: string; restaurantPlaceholder: string; message: string; messagePlaceholder: string }; sending: string; sent: string; error: string; cta: string; successMsg: string; errorMsg: string; demoBadge: string; demoNote: string };
+  contact: { badge: string; headline: string; headlineAccent: string; sub: string; fields: { name: string; namePlaceholder: string; email: string; emailPlaceholder: string; restaurant: string; restaurantPlaceholder: string; message: string; messagePlaceholder: string }; sending: string; sent: string; error: string; duplicate: string; cta: string; successMsg: string; errorMsg: string; demoBadge: string; demoNote: string };
   footer: { rights: string; location: string };
 };

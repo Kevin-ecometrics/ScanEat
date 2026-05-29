@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
+require("dotenv").config();
+
 const express = require("express");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
@@ -314,6 +316,15 @@ app.post("/api/demo/request", async (req, res) => {
 
     if (!name || !email || !restaurant) {
       return res.status(400).json({ error: "Nombre, email y restaurante son requeridos" });
+    }
+
+    const [existing] = await db.execute(
+      "SELECT id FROM demo_requests WHERE email = ? AND restaurant = ? LIMIT 1",
+      [email, restaurant]
+    );
+
+    if (existing.length > 0) {
+      return res.status(409).json({ error: "Ya existe una solicitud para este restaurante con ese correo" });
     }
 
     const token = crypto.randomBytes(32).toString("hex");
