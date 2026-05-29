@@ -6,10 +6,33 @@ const nodemailer = require("nodemailer");
 const cors = require("cors");
 const crypto = require("crypto");
 const mysql = require("mysql2/promise");
+const rateLimit = require("express-rate-limit");
 
 const app = express();
 
-app.use(cors({ origin: process.env.FRONTEND_ORIGIN || "*" }));
+const allowedOrigins = [
+  process.env.FRONTEND_ORIGIN,
+  "http://localhost:3000",
+  "https://e-commetrics.com",
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Permitir requests sin origin (Postman, mobile apps, etc)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("No permitido por CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
+
 app.use(express.json({ limit: "10kb" }));
 
 const safeText = (val) => (typeof val === "string" ? val.trim() : "");
@@ -21,6 +44,36 @@ const escapeHTML = (str) => {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 };
+
+// 🛡️ Admin Auth Middleware
+const requireAdminAuth = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  const expectedKey = process.env.ADMIN_API_KEY;
+
+  if (!expectedKey) {
+    return res.status(500).json({ error: "ADMIN_API_KEY no configurada en el servidor" });
+  }
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ error: "Se requiere autenticación" });
+  }
+
+  const token = authHeader.slice(7);
+  if (token !== expectedKey) {
+    return res.status(403).json({ error: "API key inválida" });
+  }
+
+  next();
+};
+
+// ⏱️ Rate Limiter para solicitudes de demo
+const demoRequestLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  message: { error: "Demasiadas solicitudes. Intenta de nuevo en 15 minutos." },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 // ── MySQL Connection ──
 let db = null;
@@ -305,7 +358,7 @@ app.post("/api/contact", async (req, res) => {
 });
 
 // 📬 DEMO REQUEST
-app.post("/api/demo/request", async (req, res) => {
+app.post("/api/demo/request", demoRequestLimiter, async (req, res) => {
   try {
     const name = safeText(req.body.name);
     const email = safeText(req.body.email);
@@ -379,7 +432,7 @@ app.get("/api/demo/status/:token", async (req, res) => {
 });
 
 // 📋 DEMO REQUESTS LIST (admin)
-app.get("/api/demo/requests", async (req, res) => {
+app.get("/api/demo/requests", requireAdminAuth, async (req, res) => {
   try {
     let sql = "SELECT id, name, email, restaurant, message, locale, token, status, created_at FROM demo_requests";
     const params = [];
@@ -405,7 +458,7 @@ app.get("/api/demo/requests", async (req, res) => {
 });
 
 // ✅ PATCH DEMO STATUS (admin)
-app.patch("/api/demo/requests/:id/status", async (req, res) => {
+app.patch("/api/demo/requests/:id/status", requireAdminAuth, async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
@@ -418,7 +471,7 @@ app.patch("/api/demo/requests/:id/status", async (req, res) => {
     const [result] = await db.execute(
       "UPDATE demo_requests SET status = ? WHERE id = ?",
       [status, id]
-    );
+    ); 
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: "Solicitud no encontrada" });
