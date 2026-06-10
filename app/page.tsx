@@ -2,6 +2,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import DashboardPreviews from "./components/DashboardPreviews";
 import WhyScanEat from "./components/WhyScanEat";
+import Gallery from "./components/Gallery";
 import Packages from "./components/Packages";
 import Benefits from "./components/Benefits";
 import CTAStrip from "./components/CTAStrip";
@@ -15,6 +16,7 @@ export default function LandingPage() {
       <Navbar />
       <Hero />
       <WhyScanEat />
+      <Gallery />
       <DashboardPreviews />
       <Packages />
       <Benefits />

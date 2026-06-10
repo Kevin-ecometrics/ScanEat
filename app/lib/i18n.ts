@@ -11,19 +11,19 @@ export const translations = {
     },
     hero: {
       badge: "Web App para Restaurantes",
-      headline1: "¿Tienes restaurante?",
-      headline2: "Tienes ScanEat.",
-      sub1: "La forma más rápida de potenciar tu servicio y ganar más.",
-      sub2: "Ustedes ya son los maestros de la cocina, ahora también expertos en gestión. Con la mejor web app, transformamos su talento en un negocio más ágil y rentable.",
+      headline1: "¿Tienes restaurante y quieres sacarle el maximo provecho?",
+      headline2: "Empieza a usar ScanEat ",
+      sub1: "Somos la mejor  alternativa para tu restaurante basada en la nube, sin necesidad de instalación sin instalaciones de hardware e inversion en equipo que se vuelva obsoleta",
+      sub2: "Scaneat es la forma más rápida de potenciar tu servicio y ganar más sin complicaciones informáticas.",
       cta1: "Probar demo gratis",
       cta2: "Ver video",
     },
     why: {
       badge: "¿Por qué ScanEat?",
-      headline: "Queremos que tus comensales tengan",
-      headlineAccent: "la mejor experiencia",
-      headlineEnd: "en cada pedido",
-      sub: "Automatiza y haz que regresen una y otra vez.",
+      headline: "Porque el servicio ya no solo se mide en la mesa, ",
+      headlineAccent: "también se vive en la pantalla. ",
+      headlineEnd: "",
+      sub: "Elevamos la experiencia de tus clientes con una plataforma impecable, donde pedir su platillo favorito es un proceso cómodo, rápido y diseñado para consentirlos desde el primer tap.",
       pillars: [
         {
           tag: "Sin app que instalar",
@@ -46,7 +46,7 @@ export const translations = {
       badge: "Para cada rol",
       headline: "Una app pensada para",
       headlineAccent: "todos en tu restaurante",
-      sub: "Administra todo, ve en vivo cómo van tus mesas, esto te ayudará a mejorar estrategias para aumentar ventas, disminuir el tiempo y elevar calificaciones.",
+      sub: "Sincroniza tu equipo, optimiza tus mesas en tiempo real y eleva tus calificaciones. Diseñamos la tecnología que simplifica tu operación ",
       roles: [
         {
           role: "Meseros & Hostess",
@@ -107,8 +107,8 @@ export const translations = {
       headlineAccent: "la web app",
       sub: "No sacrifiques la calidad, invierte en tecnología para mejorar tus utilidades.",
       ctaBannerSub: "Mayor eficiencia, más ventas.",
-      ctaBannerHeadline: "Es hora de cambiar la estrategia.",
-      ctaBannerSub2: "Sube el nivel de tu gestión con ScanEat.",
+      ctaBannerHeadline: "Es hora de evolucionar la mesa.",
+      ctaBannerSub2: "Eleva la gestión y la experiencia de tu restaurante con ScanEat.",
       ctaBannerBtn: "Comenzar hoy",
       items: [
         {

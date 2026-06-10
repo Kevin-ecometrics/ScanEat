@@ -204,7 +204,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 22 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.55, delay: 0.07, ease }}
-        className="text-[clamp(40px,6.5vw,78px)] font-extrabold tracking-[-3px] leading-[1.03] max-w-4xl mb-5 text-navy"
+        className="text-[clamp(40px,6.5vw,78px)] font-extrabold tracking-[-3px] leading-[1.03] max-w-6xl mb-5 text-navy"
       >
         {h.headline1}
         <br />
@@ -215,7 +215,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.12, ease }}
-        className="text-xl text-muted max-w-xl leading-relaxed mb-3 font-medium"
+        className="text-xl text-muted max-w-2xl leading-relaxed mb-3 font-medium"
       >
         {h.sub1}
       </motion.p>

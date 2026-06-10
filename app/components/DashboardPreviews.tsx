@@ -6,7 +6,11 @@ import { IconUsers, IconChart, IconPhone, IconStar, IconCheck } from "./icons";
 import { Reveal } from "./Reveal";
 import { useI18n } from "../providers/I18nProvider";
 
-const ICONS = [<IconUsers size={18} />, <IconChart size={18} />, <IconPhone size={18} />];
+const ICONS = [
+  <IconUsers size={18} />,
+  <IconChart size={18} />,
+  <IconPhone size={18} />,
+];
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function DashboardPreviews() {
@@ -18,16 +22,13 @@ export default function DashboardPreviews() {
   return (
     <section className="py-28 px-6 bg-[oklch(99.2%_0.004_80)]">
       <div className="max-w-5xl mx-auto">
-
         <Reveal className="text-center mb-16">
-          <span className="inline-flex items-center gap-1.5 bg-accent-light text-accent text-[11px] font-bold uppercase tracking-[0.12em] px-4 py-1.5 rounded-full mb-5 border border-accent/20">
-            <IconStar size={11} /> {d.badge}
+          <span className="inline-flex items-center gap-1.5 bg-accent-light text-accent text-[30px] font-bold uppercase tracking-[0.12em] px-4 py-1.5 rounded-full mb-5 border border-accent/20">
+            <IconStar size={30} /> {d.badge}
           </span>
-          <h2 className="text-[clamp(30px,4.5vw,52px)] font-extrabold tracking-[-1.5px] text-navy leading-tight max-w-3xl mx-auto">
-            {d.headline}{" "}
-            <span className="text-accent">{d.headlineAccent}</span>
-          </h2>
-          <p className="text-muted mt-5 max-w-xl mx-auto leading-relaxed text-base">{d.sub}</p>
+          <p className="text-muted mt-5 max-w-xl mx-auto leading-relaxed text-base">
+            {d.sub}
+          </p>
         </Reveal>
 
         {/* Tab pills */}
@@ -43,7 +44,9 @@ export default function DashboardPreviews() {
                     : "bg-white border-border text-muted hover:border-accent/40 hover:text-navy"
                 }`}
               >
-                <span className={active === i ? "text-white/80" : "text-accent"}>
+                <span
+                  className={active === i ? "text-white/80" : "text-accent"}
+                >
                   {ICONS[i]}
                 </span>
                 {roleName}
@@ -70,8 +73,12 @@ export default function DashboardPreviews() {
                     {ICONS[active]}
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent mb-0.5">Módulo</p>
-                    <p className="font-extrabold text-navy text-lg">{role.role}</p>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent mb-0.5">
+                      Módulo
+                    </p>
+                    <p className="font-extrabold text-navy text-lg">
+                      {role.role}
+                    </p>
                   </div>
                 </div>
 
@@ -82,11 +89,16 @@ export default function DashboardPreviews() {
                 {/* Features grid */}
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {role.features.map((f) => (
-                    <li key={f} className="flex items-start gap-3 bg-[oklch(99.2%_0.004_80)] rounded-xl px-5 py-4 border border-border">
+                    <li
+                      key={f}
+                      className="flex items-start gap-3 bg-[oklch(99.2%_0.004_80)] rounded-xl px-5 py-4 border border-border"
+                    >
                       <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-accent/10 text-accent flex items-center justify-center">
                         <IconCheck size={12} />
                       </span>
-                      <span className="text-sm text-navy font-medium leading-relaxed">{f}</span>
+                      <span className="text-sm text-navy font-medium leading-relaxed">
+                        {f}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -94,7 +106,7 @@ export default function DashboardPreviews() {
             </AnimatePresence>
           </div>
         </Reveal>
-
+        <div></div>
       </div>
     </section>
   );

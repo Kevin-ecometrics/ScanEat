@@ -4,7 +4,11 @@ import { IconQR, IconZap, IconCreditCard, IconStar } from "./icons";
 import { Reveal, RevealList } from "./Reveal";
 import { useI18n } from "../providers/I18nProvider";
 
-const ICONS = [<IconQR size={22} />, <IconZap size={22} />, <IconCreditCard size={22} />];
+const ICONS = [
+  <IconQR size={22} />,
+  <IconZap size={22} />,
+  <IconCreditCard size={22} />,
+];
 const NUMS = ["01", "02", "03"];
 
 export default function WhyScanEat() {
@@ -14,20 +18,23 @@ export default function WhyScanEat() {
   return (
     <section id="why" className="py-28 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
-
         <Reveal className="text-center mb-20">
           <span className="inline-flex items-center gap-1.5 bg-accent-light text-accent text-[11px] font-bold uppercase tracking-[0.12em] px-4 py-1.5 rounded-full mb-5 border border-accent/20">
             <IconStar size={11} /> {w.badge}
           </span>
-          <h2 className="text-[clamp(30px,4.5vw,52px)] font-extrabold tracking-[-1.5px] text-navy leading-tight max-w-3xl mx-auto">
-            {w.headline}{" "}
-            <span className="text-accent">{w.headlineAccent}</span>{" "}
+          <h2 className="text-[clamp(30px,4.5vw,52px)] font-extrabold tracking-[-1.5px] text-navy leading-tight max-w-5xl mx-auto">
+            {w.headline} <span className="text-accent">{w.headlineAccent}</span>{" "}
             {w.headlineEnd}
           </h2>
-          <p className="text-muted mt-5 max-w-lg mx-auto leading-relaxed text-base">{w.sub}</p>
+          <p className="text-muted mt-5 max-w-lg mx-auto leading-relaxed text-base">
+            {w.sub}
+          </p>
         </Reveal>
 
-        <RevealList stagger={0.1} className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <RevealList
+          stagger={0.1}
+          className="grid grid-cols-1 md:grid-cols-3 gap-5"
+        >
           {w.pillars.map(({ tag, title, desc }, i) => (
             <div
               key={title}
@@ -53,7 +60,9 @@ export default function WhyScanEat() {
 
               {/* Text */}
               <div className="relative z-10">
-                <h3 className="font-extrabold text-navy text-xl mb-3 tracking-tight">{title}</h3>
+                <h3 className="font-extrabold text-navy text-xl mb-3 tracking-tight">
+                  {title}
+                </h3>
                 <p className="text-sm text-muted leading-[1.7]">{desc}</p>
               </div>
 

@@ -1,6 +1,13 @@
 "use client";
 
-import { IconHeadphones, IconShield, IconChart, IconBell, IconArrow, IconMapPin } from "./icons";
+import {
+  IconHeadphones,
+  IconShield,
+  IconChart,
+  IconBell,
+  IconArrow,
+  IconMapPin,
+} from "./icons";
 import { Reveal, RevealList } from "./Reveal";
 import { useI18n } from "../providers/I18nProvider";
 
@@ -25,14 +32,17 @@ export default function Benefits() {
   return (
     <section className="py-28 px-6 bg-white">
       <div className="max-w-6xl mx-auto">
-
         {/* Stats strip */}
         <Reveal>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden mb-20 border border-border">
             {STATS.map(({ val, label }) => (
               <div key={label} className="bg-white px-8 py-8 text-center">
-                <p className="text-[clamp(28px,4vw,44px)] font-extrabold text-accent tracking-tight leading-none mb-2">{val}</p>
-                <p className="text-xs text-muted font-semibold leading-snug max-w-[120px] mx-auto">{label}</p>
+                <p className="text-[clamp(28px,4vw,44px)] font-extrabold text-accent tracking-tight leading-none mb-2">
+                  {val}
+                </p>
+                <p className="text-xs text-muted font-semibold leading-snug max-w-[120px] mx-auto">
+                  {label}
+                </p>
               </div>
             ))}
           </div>
@@ -41,14 +51,19 @@ export default function Benefits() {
         {/* Section header */}
         <Reveal className="text-center mb-16">
           <h2 className="text-[clamp(30px,4.5vw,52px)] font-extrabold tracking-[-1.5px] text-navy leading-tight mb-4">
-            {b.headline}{" "}
-            <span className="text-accent">{b.headlineAccent}</span>
+            {b.headline} <span className="text-accent">{b.headlineAccent}</span>
           </h2>
-          <p className="text-muted max-w-lg mx-auto leading-relaxed text-base">{b.sub}</p>
+          <p className="text-muted max-w-lg mx-auto leading-relaxed text-base">
+            {b.sub}
+          </p>
         </Reveal>
 
         {/* Benefit cards */}
-        <RevealList stagger={0.08} className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-14" itemClassName="h-full">
+        <RevealList
+          stagger={0.08}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-14"
+          itemClassName="h-full"
+        >
           {b.items.map(({ title, desc, note }, i) => (
             <div
               key={title}
@@ -58,7 +73,9 @@ export default function Benefits() {
               <div className="w-12 h-12 rounded-2xl bg-accent-light text-accent flex items-center justify-center mb-6 group-hover:bg-accent group-hover:text-white transition-all duration-300 shadow-sm">
                 {ICONS[i]}
               </div>
-              <h3 className="font-extrabold text-navy text-lg mb-2 tracking-tight">{title}</h3>
+              <h3 className="font-extrabold text-navy text-lg mb-2 tracking-tight">
+                {title}
+              </h3>
               <p className="text-sm text-muted leading-[1.7] flex-1">{desc}</p>
               {note && (
                 <div className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-accent">
@@ -80,7 +97,9 @@ export default function Benefits() {
               <div className="absolute -bottom-10 -left-10 w-56 h-56 rounded-full bg-white/20 blur-xl" />
             </div>
             <div className="relative z-10">
-              <p className="text-white/65 text-sm font-semibold mb-2 uppercase tracking-wider">{b.ctaBannerSub}</p>
+              <p className="text-white/65 text-sm font-semibold mb-2 uppercase tracking-wider">
+                {b.ctaBannerSub}
+              </p>
               <h3 className="text-white font-extrabold text-[clamp(22px,3vw,32px)] leading-tight tracking-tight">
                 {b.ctaBannerHeadline}
                 <br />
