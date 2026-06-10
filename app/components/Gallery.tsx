@@ -17,7 +17,7 @@ export default function Gallery() {
 
           <Reveal
             delay={0.1}
-            className="row-start-2 col-start-1  mr-[-60px] aspect-video"
+            className="row-start-2 col-start-1 mr-[-60px] aspect-video self-end"
           >
             <img
               src="/qr.jpeg"
@@ -28,7 +28,7 @@ export default function Gallery() {
 
           <Reveal
             delay={0.2}
-            className="row-start-1 row-span-2 col-start-2 ml-20 mb-10"
+            className="row-start-1 row-span-2 col-start-2 ml-20"
           >
             <img
               src="/mas_restaurantes.jpg"
