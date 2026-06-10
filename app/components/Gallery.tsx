@@ -11,7 +11,7 @@ export default function Gallery() {
             <img
               src="/gestiona.jpg"
               alt=""
-              className="rounded-2xl w-full h-full object-cover"
+              className="rounded-2xl w-full h-full object-cover shadow-2xl"
             />
           </Reveal>
 
@@ -22,18 +22,18 @@ export default function Gallery() {
             <img
               src="/qr.jpeg"
               alt=""
-              className="rounded-2xl w-full h-full object-cover"
+              className="rounded-2xl w-full h-full object-cover shadow-2xl"
             />
           </Reveal>
 
           <Reveal
             delay={0.2}
-            className="row-start-1 row-span-2 col-start-2 ml-20"
+            className="row-start-1 row-span-2 col-start-2 ml-20 "
           >
             <img
               src="/mas_restaurantes.jpg"
               alt=""
-              className="rounded-2xl w-full h-full object-cover"
+              className="rounded-2xl w-full h-full object-cover shadow-2xl"
             />
           </Reveal>
         </div>
