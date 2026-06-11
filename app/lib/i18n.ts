@@ -1,3 +1,5 @@
+import { title } from "process";
+
 export type Locale = "es" | "en";
 
 export const translations = {
@@ -135,6 +137,51 @@ export const translations = {
       { label: "Descubre ScanEat", headline: "Agiliza tu restaurante.", sub: "Empieza hoy.", cta: "Probar demo", featured: true },
       { label: "Sin compromiso", headline: "Actívalo cuando quieras", cta: "Ver demo" },
     ],
+    comparative: {
+      titleAccent: "ScanEat ",
+      title: "VS Otras Soluciones",
+      tableHeader1: "Característica",
+      tableHeader2: "ScanEat", 
+      tableHeader3: "Otros",
+      items: [
+        {
+          feature: "Implementación",
+          scanEat: "100% en la nube, sin instalaciones adicionales.",
+          others: "Requieren configuración, hardware o soporte técnico.",
+        },
+        {
+          feature: "Experiencia de Usuario",
+          scanEat: "Moderna, intuitiva y enfocada en autoservicio.",
+          others: "Más complejos, rígidos o con procesos tradicionales.",
+        },
+        {
+          feature: "Costos",
+          scanEat: "Suscripción accesible, sin inversiones iniciales altas.",
+          others: "Costos mayores en licencias, hardware o mantenimiento.",
+        },
+        {
+          feature: "Infraestructura",
+          scanEat: "En la nube, sin equipos adicionales.",
+          others: "Dependen de servidores, dispositivos o configuraciones locales.",
+        },
+        {
+          feature: "Escalabilidad",
+          scanEat: "Fácil de expandir y gestionar desde la web.",
+          others: "Crecimiento más lento y dependiente de infraestructura.",
+        },
+        {
+          feature: "Código QR",
+          scanEat: "QR-First: el QR es el centro de la operación.",
+          others: "El QR suele ser secundario o inexistente.",
+        },
+        {
+          feature: "Datos y analítica",
+          scanEat: "Métricas centralizadas y en tiempo real.",
+          others:
+            "Datos fragmentados o poca visibilidad del comportamiento del cliente.",
+        },
+      ],
+    },
     faq: {
       badge: "Preguntas frecuentes",
       headline: "¿Preguntas?",
@@ -147,6 +194,10 @@ export const translations = {
         { q: "¿Cómo funcionan las calificaciones de clientes?", a: "Las reseñas son calificaciones que cada cliente puede dejar después de su servicio. Esta calificación y los comentarios permiten identificar y atacar áreas de oportunidad para mejorar continuamente." },
         { q: "¿Hay costos ocultos o cargos por actualización?", a: "No. Las actualizaciones y mejoras son tuyas, totalmente gratis. El precio mensual lo es todo." },
       ],
+    },
+    banner: {
+      title: "Sin hardware, sin contratos forzosos",
+      titleWave: "Pruébalo gratis durante 30 días",
     },
     contact: {
       badge: "Demo gratuita",
@@ -189,19 +240,19 @@ export const translations = {
     },
     hero: {
       badge: "Web App for Restaurants",
-      headline1: "You have a restaurant?",
-      headline2: "You have ScanEat.",
-      sub1: "The fastest way to boost your service and earn more.",
-      sub2: "You are already masters of the kitchen, now become experts in management too. With the best web app, we turn your talent into a more agile and profitable business.",
+      headline1: "Do you own a restaurant and want to get the most out of it?",
+      headline2: "Start using ScanEat.",
+      sub1: "We are the best cloud-based solution for your restaurant—no installation required, no hardware setup, and no need to invest in equipment that will eventually become obsolete",
+      sub2: "Scaneat is the fastest way to boost your service and increase your revenue without any IT hassles.",
       cta1: "Try demo free",
       cta2: "Watch video",
     },
     why: {
       badge: "Why ScanEat?",
-      headline: "We want your guests to have",
-      headlineAccent: "the best experience",
-      headlineEnd: "with every order",
-      sub: "Automate and make them come back again and again.",
+      headline: "Because service is no longer measured solely at the table",
+      headlineAccent: "it’s also experienced on the screen. ",
+      headlineEnd: "",
+      sub: "We enhance your customers' experience with a seamless platform where ordering their favorite dish is a convenient, fast process designed to pamper them from the very first tap. ",
       pillars: [
         {
           tag: "No app needed",
@@ -224,7 +275,7 @@ export const translations = {
       badge: "For every role",
       headline: "An app built for",
       headlineAccent: "everyone in your restaurant",
-      sub: "Manage everything, see your tables live, this will help you improve strategies to increase sales, reduce time, and raise ratings.",
+      sub: "Synchronize your team, optimize your tables in real time, and boost your ratings. We design technology that streamlines your operations ",
       roles: [
         {
           role: "Waitstaff & Hostess",
@@ -285,8 +336,8 @@ export const translations = {
       headlineAccent: "the web app",
       sub: "Don't sacrifice quality, invest in technology to improve your profits.",
       ctaBannerSub: "Greater efficiency, more sales.",
-      ctaBannerHeadline: "Time to change the strategy.",
-      ctaBannerSub2: "Level up your management with ScanEat.",
+      ctaBannerHeadline: "It's time to take the table to the next level.",
+      ctaBannerSub2: "Take your restaurant's management and customer experience to the next level with ScanEat",
       ctaBannerBtn: "Start today",
       items: [
         {
@@ -313,6 +364,51 @@ export const translations = {
       { label: "Discover ScanEat", headline: "Streamline your restaurant.", sub: "Start today.", cta: "Try demo", featured: true },
       { label: "No commitment", headline: "Activate whenever you want", cta: "Watch demo" },
     ],
+    comparative: {
+      titleAccent: "ScanEat ",
+      title: "VS Other Solutions",
+      tableHeader1: "Feature",
+      tableHeader2: "ScanEat ",
+      tableHeader3: "Others",
+      items: [
+        {
+          feature: "Implementation",
+          scanEat: "100% cloud-based, no additional installations required.",
+          others: "Require configuration, hardware, or technical support.",
+        },
+        {
+          feature: "User Experience",
+          scanEat: "Modern, intuitive, and focused on self-service.",
+          others: "More complex, rigid, or based on traditional processes.",
+        },
+        {
+          feature: "Costs",
+          scanEat: "Affordable subscription, no high upfront costs.",
+          others: "Higher costs for licenses, hardware, or maintenance.",
+        },
+        {
+          feature: "Infrastructure",
+          scanEat: "Cloud-based, no additional equipment required.",
+          others: "Dependent on servers, devices, or local configurations.",
+        },
+        {
+          feature: "Scalability",
+          scanEat: "Easy to scale and manage via the web.",
+          others: "Slower growth and dependent on infrastructure.",
+        },
+        {
+          feature: "QR Code",
+          scanEat: "QR-First: the QR code is at the heart of the operation.",
+          others: "The QR code is often secondary or nonexistent.",
+        },
+        {
+          feature: "Data and Analytics",
+          scanEat: "Centralized, real-time metrics.",
+          others:
+            "Fragmented data or limited visibility into customer behavior.",
+        },
+      ],
+    },
     faq: {
       badge: "Frequently asked questions",
       headline: "Questions?",
@@ -325,6 +421,10 @@ export const translations = {
         { q: "How do guest ratings work?", a: "Reviews are ratings each guest can leave after their service. These ratings and comments help identify and address areas for improvement continuously." },
         { q: "Are there hidden costs or update fees?", a: "No. Updates and improvements are yours, completely free. The monthly price is all there is." },
       ],
+    },
+    banner: {
+      title: "No hardware, no long-term contracts",
+      titleWave: "Try ScanEat free for 30 days",
     },
     contact: {
       badge: "Free demo",
@@ -366,7 +466,9 @@ export type Translations = {
   packages: { badge: string; headline: string; headlineAccent: string; sub: string; reporterLabel: string; comingSoon: string; cta: string; includes: { title: string; desc: string }[]; badges: string[] };
   benefits: { headline: string; headlineAccent: string; sub: string; ctaBannerSub: string; ctaBannerHeadline: string; ctaBannerSub2: string; ctaBannerBtn: string; items: { title: string; desc: string; note?: string }[] };
   ctas: { label: string; headline: string; sub?: string; cta: string; featured?: boolean }[];
+  comparative: { titleAccent: string; title: string; tableHeader1: string; tableHeader2: string; tableHeader3: string; items: {feature: String; scanEat: String; others: String;}[]};
   faq: { badge: string; headline: string; headlineAccent: string; items: { q: string; a: string }[] };
+  banner: { title: string; titleWave: string; };
   contact: { badge: string; headline: string; headlineAccent: string; sub: string; fields: { name: string; namePlaceholder: string; email: string; emailPlaceholder: string; restaurant: string; restaurantPlaceholder: string; message: string; messagePlaceholder: string }; sending: string; sent: string; error: string; duplicate: string; cta: string; successMsg: string; errorMsg: string; demoBadge: string; demoNote: string };
   footer: { rights: string; location: string };
 };

@@ -9,8 +9,9 @@ export default function Gallery() {
         <div className="grid grid-cols-2 gap-4">
           <Reveal className="row-start-1 col-start-1 mr-[-60px] aspect-video">
             <img
-              src="/gestiona.jpg"
-              alt=""
+              src="/Gestiona tus platillos con scaneat.jpg"
+              title="Da de alta platillos y baja desde tu computadora, tablet, celular con ScanEat"
+              alt="Da de alta platillos y baja desde tu computadora, tablet, celular con ScanEat"
               className="rounded-2xl w-full h-full object-cover shadow-2xl"
             />
           </Reveal>
@@ -20,8 +21,9 @@ export default function Gallery() {
             className="row-start-2 col-start-1 mr-[-60px] aspect-video self-end"
           >
             <img
-              src="/qr.jpeg"
-              alt=""
+              src="/Personaliza tu menu digital con scaneat.jpeg"
+              title="Crea tu menu digital con la identidad de tu restaurante  hazlo todo a tu medida con ScanEat"
+              alt="Crea tu menu digital con la identidad de tu restaurante  hazlo todo a tu medida con ScanEat"
               className="rounded-2xl w-full h-full object-cover shadow-2xl"
             />
           </Reveal>
@@ -31,8 +33,9 @@ export default function Gallery() {
             className="row-start-1 row-span-2 col-start-2 ml-20 "
           >
             <img
-              src="/mas_restaurantes.jpg"
-              alt=""
+              src="/Cada vez mas restaurantes se estan cambiando a scaneat.jpg"
+              title="Con ScanEat recibe retroalimentación en vivo de tus clientes y mejora tu servicio al momento"
+              alt="Con ScanEat recibe retroalimentación en vivo de tus clientes y mejora tu servicio al momento"
               className="rounded-2xl w-full h-full object-cover shadow-2xl"
             />
           </Reveal>
