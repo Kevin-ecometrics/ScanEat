@@ -191,13 +191,6 @@ export default function BlogPostPage() {
               Probar demo gratis <IconArrow size={14} />
             </a>
           </div>
-
-          <p className="text-navy/80 leading-relaxed">
-            Invierte en buenos alimentos y en el mejor personal, no en un sistema costoso o difícil de
-            gestionar. No hagas tu lista de compras a mano ni anotes en un post-it cuando se agote un
-            producto en cocina: mejor suspéndelo del menú al instante y evita que tu comensal lo vea y se
-            moleste al enterarse de que ya no hay.
-          </p>
         </div>
       </article>
 

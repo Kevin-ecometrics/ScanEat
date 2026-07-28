@@ -192,13 +192,6 @@ export default function BlogPostPageEn() {
               Try free demo <IconArrow size={14} />
             </a>
           </div>
-
-          <p className="text-navy/80 leading-relaxed">
-            Invest in great food and the best staff, not in a system that's expensive or hard to manage.
-            Don't keep a shopping list by hand or scribble on a sticky note when something runs out in
-            the kitchen — instead, suspend that item instantly, so your guest never sees it and gets
-            annoyed to find out it's sold out.
-          </p>
         </div>
       </article>
 
