@@ -8,6 +8,7 @@ import Benefits from "./components/Benefits";
 import CTAStrip from "./components/CTAStrip";
 import Compare from "./components/Compare";
 import FAQ from "./components/FAQ";
+import Blog from "./components/Blog";
 import Banner from "./components/Banner";
 import ContactForm from "./components/ContactForm";
 import Footer from "./components/Footer";
@@ -25,6 +26,7 @@ export default function LandingPage() {
       <CTAStrip />
       <Compare />
       <FAQ />
+      <Blog />
       <Banner />
       <ContactForm />
       <Footer />

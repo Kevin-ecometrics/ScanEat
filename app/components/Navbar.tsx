@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { IconQR, IconArrow } from "./icons";
 import { useI18n } from "../providers/I18nProvider";
@@ -41,8 +42,16 @@ function IconClose() {
   );
 }
 
-export default function Navbar() {
+export default function Navbar({
+  blogAlternate,
+}: {
+  /** When set, this Navbar is rendered on a blog post page: toggling the
+   * language navigates to the sibling post instead of just flipping the
+   * in-memory locale (blog posts are separate static routes per language). */
+  blogAlternate?: { es: string; en: string };
+}) {
   const { locale, setLocale, t } = useI18n();
+  const router = useRouter();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -52,11 +61,18 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
+  function toggleLocale() {
+    const next = locale === "es" ? "en" : "es";
+    setLocale(next);
+    if (blogAlternate) router.push(blogAlternate[next]);
+  }
+
   const links = [
-    [t.nav.why, "#why"],
-    [t.nav.packages, "#packages"],
-    [t.nav.faq, "#faq"],
-    [t.nav.contact, "#contact"],
+    [t.nav.why, "/#why"],
+    [t.nav.packages, "/#packages"],
+    [t.nav.faq, "/#faq"],
+    [t.nav.blog, "/#blog"],
+    [t.nav.contact, "/#contact"],
   ];
 
   return (
@@ -97,7 +113,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2">
             {/* Locale toggle */}
             <button
-              onClick={() => setLocale(locale === "es" ? "en" : "es")}
+              onClick={toggleLocale}
               className="text-[11px] font-extrabold px-3 py-1.5 rounded-lg border-2 border-border text-muted hover:border-accent hover:text-accent transition-all tracking-widest"
               aria-label="Toggle language"
             >
@@ -106,7 +122,7 @@ export default function Navbar() {
 
             {/* CTA */}
             <a
-              href="#contact"
+              href="/#contact"
               className="hidden sm:inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white text-sm font-bold px-5 py-2.5 rounded-xl transition-all hover:-translate-y-px hover:shadow-lg hover:shadow-accent/25 no-underline"
             >
               {t.nav.demo} <IconArrow size={14} />
@@ -146,7 +162,7 @@ export default function Navbar() {
                 </a>
               ))}
               <a
-                href="#contact"
+                href="/#contact"
                 onClick={() => setMobileOpen(false)}
                 className="mt-3 inline-flex items-center justify-center gap-2 bg-accent text-white font-bold text-base px-5 py-3 rounded-xl transition-all no-underline"
               >

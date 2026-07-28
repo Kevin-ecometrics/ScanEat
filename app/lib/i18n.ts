@@ -8,6 +8,7 @@ export const translations = {
       why: "¿Por qué ScanEat?",
       packages: "Paquetes",
       faq: "FAQ",
+      blog: "Blog",
       contact: "Contacto",
       demo: "Probar demo",
     },
@@ -195,6 +196,19 @@ export const translations = {
         { q: "¿Hay costos ocultos o cargos por actualización?", a: "No. Las actualizaciones y mejoras son tuyas, totalmente gratis. El precio mensual lo es todo." },
       ],
     },
+    blog: {
+      badge: "Blog",
+      headline: "Aprende a agilizar",
+      headlineAccent: "tu restaurante",
+      sub: "Ideas y guías prácticas para digitalizar tu operación sin complicarte.",
+      slug: "software-para-restaurantes-en-la-nube-sin-hardware",
+      readTime: "6 min de lectura",
+      post: {
+        title: "Cómo digitalizar tu restaurante sin gastar en hardware",
+        excerpt: "Tu comida es espectacular, pero si las comandas no salen a tiempo el cliente se va descontento. Descubre cómo un sistema de comandas digitales y KDS en la nube resuelve el caos de cocina y servicio.",
+        cta: "Leer artículo",
+      },
+    },
     banner: {
       title: "Sin hardware, sin contratos forzosos",
       titleWave: "Pruébalo gratis durante 30 días",
@@ -235,6 +249,7 @@ export const translations = {
       why: "Why ScanEat?",
       packages: "Packages",
       faq: "FAQ",
+      blog: "Blog",
       contact: "Contact",
       demo: "Try demo",
     },
@@ -422,6 +437,19 @@ export const translations = {
         { q: "Are there hidden costs or update fees?", a: "No. Updates and improvements are yours, completely free. The monthly price is all there is." },
       ],
     },
+    blog: {
+      badge: "Blog",
+      headline: "Learn how to streamline",
+      headlineAccent: "your restaurant",
+      sub: "Practical ideas and guides to digitize your operation without the hassle.",
+      slug: "cloud-restaurant-software-without-hardware",
+      readTime: "6 min read",
+      post: {
+        title: "How to Digitize Your Restaurant Without Spending on Hardware",
+        excerpt: "Your food is spectacular, but if tickets don't come out on time, guests leave unhappy. Discover how a cloud-based digital ticket and KDS system fixes kitchen and service chaos.",
+        cta: "Read article",
+      },
+    },
     banner: {
       title: "No hardware, no long-term contracts",
       titleWave: "Try ScanEat free for 30 days",
@@ -459,7 +487,7 @@ export const translations = {
 } as const;
 
 export type Translations = {
-  nav: { why: string; packages: string; faq: string; contact: string; demo: string };
+  nav: { why: string; packages: string; faq: string; blog: string; contact: string; demo: string };
   hero: { badge: string; headline1: string; headline2: string; sub1: string; sub2: string; cta1: string; cta2: string };
   why: { badge: string; headline: string; headlineAccent: string; headlineEnd: string; sub: string; pillars: { tag: string; title: string; desc: string }[] };
   dashboards: { badge: string; headline: string; headlineAccent: string; sub: string; roles: { role: string; headline: string; features: string[] }[] };
@@ -468,6 +496,7 @@ export type Translations = {
   ctas: { label: string; headline: string; sub?: string; cta: string; featured?: boolean }[];
   comparative: { titleAccent: string; title: string; tableHeader1: string; tableHeader2: string; tableHeader3: string; items: {feature: String; scanEat: String; others: String;}[]};
   faq: { badge: string; headline: string; headlineAccent: string; items: { q: string; a: string }[] };
+  blog: { badge: string; headline: string; headlineAccent: string; sub: string; slug: string; readTime: string; post: { title: string; excerpt: string; cta: string } };
   banner: { title: string; titleWave: string; };
   contact: { badge: string; headline: string; headlineAccent: string; sub: string; fields: { name: string; namePlaceholder: string; email: string; emailPlaceholder: string; restaurant: string; restaurantPlaceholder: string; message: string; messagePlaceholder: string }; sending: string; sent: string; error: string; duplicate: string; cta: string; successMsg: string; errorMsg: string; demoBadge: string; demoNote: string };
   footer: { rights: string; location: string };
